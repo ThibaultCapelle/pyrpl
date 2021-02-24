@@ -64,6 +64,7 @@ read_verilog                      $path_rtl/axi_wr_fifo.v
 
 read_verilog                      $path_rtl/red_pitaya_ams.v
 read_verilog                      $path_rtl/red_pitaya_asg_ch.v
+read_verilog                      $path_rtl/red_pitaya_asg_ch_bis.v
 read_verilog                      $path_rtl/red_pitaya_asg.v
 read_verilog                      $path_rtl/red_pitaya_dfilt1.v
 read_verilog                      $path_rtl/red_pitaya_hk.v
@@ -83,11 +84,15 @@ read_verilog                      $path_rtl/red_pitaya_iir_block.v
 read_verilog                      $path_rtl/red_pitaya_iq_modulator_block.v
 read_verilog                      $path_rtl/red_pitaya_lpf_block.v
 read_verilog                      $path_rtl/red_pitaya_filter_block.v
+read_verilog                      $path_rtl/red_pitaya_iq_fgen_block_simple.v
 #read_verilog                     $path_rtl/red_pitaya_iq_lpf_block.v
 read_verilog                      $path_rtl/red_pitaya_iq_demodulator_block.v
 read_verilog                      $path_rtl/red_pitaya_pfd_block.v
 #read_verilog                     $path_rtl/red_pitaya_iq_hpf_block.v
 read_verilog                      $path_rtl/red_pitaya_iq_fgen_block.v
+
+read_verilog                      $path_rtl/red_pitaya_iq_block_bis.v
+read_verilog                      $path_rtl/red_pitaya_do_nothing.v
 read_verilog                      $path_rtl/red_pitaya_iq_block.v
 read_verilog                      $path_rtl/red_pitaya_light_iq_block.v
 read_verilog                      $path_rtl/red_pitaya_trigger_block.v

@@ -150,6 +150,8 @@ iq_fgen
   );
   
   // output_signal multiplexer
+
+assign dat_o = sin;
 assign signal_o = cos;
 
 assign signal2_o = cos_shifted;

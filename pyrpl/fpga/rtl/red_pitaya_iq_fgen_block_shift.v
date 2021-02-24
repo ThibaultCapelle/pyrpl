@@ -42,7 +42,7 @@
 */
 
 
-module red_pitaya_iq_fgen_block #(
+module red_pitaya_iq_fgen_block_shift #(
     parameter     LUTSZ     = 11,  
     parameter     LUTBITS   = 17,  
     parameter     PHASEBITS = 32 
@@ -58,6 +58,7 @@ module red_pitaya_iq_fgen_block #(
 
     input  [PHASEBITS-1:0] start_phase,
     input  [PHASEBITS-1:0] shift_phase,
+    input  [PHASEBITS-1:0] delta_phase,
     output [LUTBITS-1:0] sin_o      ,
     output [LUTBITS-1:0] cos_o      ,
     output [LUTBITS-1:0] sin_shifted_o      ,
@@ -75,7 +76,6 @@ assign cos_o = cos;
 assign cos_shifted_o = cos_shifted;
 
 localparam QSHIFT = {{PHASEBITS-1{1'b0}},1'b1}  << (PHASEBITS-2);
-localparam QSHIFTBIS = {{PHASEBITS-1{1'b0}},1'b1}  << (PHASEBITS-3);
 
 //lut data block
 reg [LUTBITS-1-1:0] lutrom [0:(1<<LUTSZ)-1];

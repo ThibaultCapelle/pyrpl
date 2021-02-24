@@ -42,7 +42,7 @@
 */
 
 
-module red_pitaya_iq_fgen_block #(
+module red_pitaya_iq_fgen_block_shift #(
     parameter     LUTSZ     = 11,  
     parameter     LUTBITS   = 17,  
     parameter     PHASEBITS = 32 
@@ -58,6 +58,7 @@ module red_pitaya_iq_fgen_block #(
 
     input  [PHASEBITS-1:0] start_phase,
     input  [PHASEBITS-1:0] shift_phase,
+    input  [PHASEBITS-1:0] delta_phase,
     output [LUTBITS-1:0] sin_o      ,
     output [LUTBITS-1:0] cos_o      ,
     output [LUTBITS-1:0] sin_shifted_o      ,
@@ -75,11 +76,11 @@ assign cos_o = cos;
 assign cos_shifted_o = cos_shifted;
 
 localparam QSHIFT = {{PHASEBITS-1{1'b0}},1'b1}  << (PHASEBITS-2);
-localparam QSHIFTBIS = {{PHASEBITS-1{1'b0}},1'b1}  << (PHASEBITS-3);
 
 //lut data block
 reg [LUTBITS-1-1:0] lutrom [0:(1<<LUTSZ)-1];
 reg [PHASEBITS-1:0] phase;
+reg [PHASEBITS-1:0] phase_shifted;
 
 wire [PHASEBITS-1:0] wwphase1;
 wire [PHASEBITS-1:0] wwphase2;
@@ -122,43 +123,18 @@ reg [LUTBITS-1:0] phase4;
 //     - we assign invertphase1-4, the flag telling if we are in the rising or falling quadrant of the sine
 //     - we assign invertsignal1-4, the flag telling if we in the positive or negative sign of the sine
 
-assign wwphase1 = sin_at_2f ? {phase[PHASEBITS-1:0],1'b0} : phase; // wwphase1 ready in cycle n
-assign wwphase2 = cos_at_2f ? {phase[PHASEBITS-1:0],1'b0} + QSHIFT : phase + QSHIFT;
-assign wwphase3 = sin_shifted_at_2f ? {phase[PHASEBITS-1:0],1'b0} + start_phase : phase + start_phase;
-assign wwphase4 = cos_shifted_at_2f ? {phase[PHASEBITS-1:0],1'b0} + start_phase + QSHIFT : phase + start_phase + QSHIFT;
+assign wwphase1 = phase; // wwphase1 ready in cycle n
+
 assign wphase1 = wwphase1[PHASEBITS-2-1:PHASEBITS-2-LUTSZ]; //wwphase1 ready in cycle n
-assign wphase2 = wwphase2[PHASEBITS-2-1:PHASEBITS-2-LUTSZ];
-assign wphase3 = wwphase3[PHASEBITS-2-1:PHASEBITS-2-LUTSZ];
-assign wphase4 = wwphase4[PHASEBITS-2-1:PHASEBITS-2-LUTSZ];
-assign invertphase1  = wwphase1[PHASEBITS-1-1];  //invertphase1 ready in cycle n
-assign invertphase2  = wwphase2[PHASEBITS-1-1]; 
-assign invertphase3  = wwphase3[PHASEBITS-1-1]; 
-assign invertphase4  = wwphase4[PHASEBITS-1-1]; 
-assign invertsignal1 = wwphase1[PHASEBITS-1]; //invertsignal1 ready in cycle n
-assign invertsignal2 = wwphase2[PHASEBITS-1];
-assign invertsignal3 = wwphase3[PHASEBITS-1];
-assign invertsignal4 = wwphase4[PHASEBITS-1];
+
+
 
 //main loop
 always @(posedge clk_i) begin
-    phase1 <= invertphase1 ? (~wphase1) : wphase1;  //phase1 ready in cycle n+1
-    phase2 <= invertphase2 ? (~wphase2) : wphase2;
-    phase3 <= invertphase3 ? (~wphase3) : wphase3;
-    phase4 <= invertphase4 ? (~wphase4) : wphase4;
-    invertsignal1_reg <= invertsignal1; //invertsignal1_reg ready in cycle n+1
-    invertsignal2_reg <= invertsignal2;
-    invertsignal3_reg <= invertsignal3;
-    invertsignal4_reg <= invertsignal4;
-    invertsignal1_reg_reg <= invertsignal1_reg; //invertsignal1_reg_reg ready in cycle n+2
-    invertsignal2_reg_reg <= invertsignal2_reg;
-    invertsignal3_reg_reg <= invertsignal3_reg;
-    invertsignal4_reg_reg <= invertsignal4_reg;
+    phase1 <= wphase1;  //phase1 ready in cycle n+1
     sin_reg <= lutrom[phase1];    //sin_reg ready in cycle n+2
-    cos_reg <= lutrom[phase2];
-    sin_shifted_reg <= lutrom[phase3];
-    cos_shifted_reg <= lutrom[phase4];
     if (on==1'b0) begin
-        phase <= {PHASEBITS{1'b0}}; 
+        phase <= {PHASEBITS{1'b0}};
         sin <= {LUTBITS{1'b0}};
         cos <= {LUTBITS{1'b0}};
         sin_shifted <= {LUTBITS{1'b0}};
@@ -166,10 +142,7 @@ always @(posedge clk_i) begin
     end 
     else begin 
         phase <= phase + shift_phase; // new phase is ready in (arbitrary) cycle n
-        sin <= invertsignal1_reg_reg ? ((~sin_reg)+'b1) : sin_reg;    //sin ready in cycle n+3  - based purely on signals that are ready in cycle n+2 -> timing correct, latency 3 cycles
-        cos <= invertsignal2_reg_reg ? ((~cos_reg)+'b1) : cos_reg; 
-        sin_shifted <= invertsignal3_reg_reg ? ((~sin_shifted_reg)+'b1) : sin_shifted_reg;  
-        cos_shifted <= invertsignal4_reg_reg ? ((~cos_shifted_reg)+'b1) : cos_shifted_reg;   
+        sin <= sin_reg;
     end
 end
 
