@@ -295,6 +295,7 @@ wire                  dac_clk_2p;
 reg                   dac_rst;
 reg          [14-1:0] dac_dat_a, dac_dat_b;
 wire         [14-1:0] dac_a    , dac_b    ;
+wire         [14-1:0] dac_a_dsp    , dac_b_dsp    ;
 
 // ASG
 wire  signed [14-1:0] asg_a    , asg_b    ;
@@ -401,12 +402,12 @@ red_pitaya_hk i_hk (
   // global configuration
   .digital_loop    (  digital_loop               ),
   // Expansion connector
-  .exp_p_dat_i     (  exp_p_in                   ),  // input data
+  /*.exp_p_dat_i     (  exp_p_in                   ),  // input data
   .exp_p_dat_o     (  exp_p_out                  ),  // output data
   .exp_p_dir_o     (  exp_p_dir                  ),  // 1-output enable
   .exp_n_dat_i     (  exp_n_in                   ),
   .exp_n_dat_o     (  exp_n_out                  ),
-  .exp_n_dir_o     (  exp_n_dir                  ),
+  .exp_n_dir_o     (  exp_n_dir                  ),*/
    // System bus
   .sys_addr        (  sys_addr                   ),  // address
   .sys_wdata       (  sys_wdata                  ),  // write data
@@ -470,6 +471,12 @@ red_pitaya_scope i_scope (
 //---------------------------------------------------------------------------------
 //  DAC arbitrary signal generator
 wire    [14-1: 0] asg1phase_o;
+/*reg [21:0] count;
+always @(posedge adc_clk) begin
+    count <= count + 1 ;
+end
+assign exp_n_out = count[20];//GPIO_out;
+assign exp_n_dir = 8'b1;*/
 
 red_pitaya_asg i_asg (
    // DAC
@@ -482,7 +489,12 @@ red_pitaya_asg i_asg (
   .trig_out_o      (  trig_asg_out               ),
   .trig_scope_i    (  trig_scope_out             ),
   .asg1phase_o     (  asg1phase_o                ),
-  
+  .exp_n_dat_i     (  exp_n_in                   ),
+  .exp_n_dat_o     (  exp_n_out                  ),
+  .exp_n_dir_o     (  exp_n_dir                  ),
+  .exp_p_dat_i     (  exp_p_in                   ),  // input data
+  .exp_p_dat_o     (  exp_p_out                  ),  // output data
+  .exp_p_dir_o     (  exp_p_dir                  ),  // 1-output enable
   // System bus
   .sys_addr        (  sys_addr                   ),  // address
   .sys_wdata       (  sys_wdata                  ),  // write data
@@ -511,7 +523,7 @@ red_pitaya_dsp i_dsp (
   .scope1_o        (  to_scope_a             ),
   .scope2_o        (  to_scope_b             ),
   .asg1phase_i     (  asg1phase_o            ),
-
+  
   .pwm0            (  pwm_signals[0]         ),
   .pwm1            (  pwm_signals[1]         ),
   .pwm2            (  pwm_signals[2]         ),

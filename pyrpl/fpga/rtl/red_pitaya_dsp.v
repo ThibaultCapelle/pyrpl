@@ -52,7 +52,8 @@ should not be used.
 
 
 module red_pitaya_dsp #(
-	parameter MODULES = 8
+	parameter MODULES = 8,
+	parameter DWE = 8 // data width for extension
 )
 (
    // signals
@@ -154,6 +155,20 @@ wire            module_ack   [MODULES-1:0];
 //connect scope
 assign scope1_o = input_signal[SCOPE1];
 assign scope2_o = input_signal[SCOPE2];
+
+wire      [ 14-1: 0] mult_out;
+/*multiplicator #(
+    .INBITS1(14),
+    .INBITS2(14),
+    .OUTBITS(14))
+    mult
+    (
+    .clk_i(clk_i),
+    .signal1_i(asg1_i),
+    .signal2_i(asg2_i),
+    .signal_o(mult_out)
+    );*/
+assign mult_out = 14'hfff;
 
 //connect asg output
 assign output_signal[ASG1] = asg1_i;

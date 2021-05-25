@@ -67,9 +67,7 @@
  * 
  */
 
-module red_pitaya_asg #(
-  parameter DWE = 8
-)(
+module red_pitaya_derived_clock (
   // DAC
   output     [ 14-1: 0] dac_a_o   ,  // DAC data CHA
   output     [ 14-1: 0] dac_b_o   ,  // DAC data CHB
@@ -82,12 +80,7 @@ module red_pitaya_asg #(
   input                 trig_scope_i    ,  // trigger from the scope
 
   output     [ 14-1: 0] asg1phase_o,
-  input      [DWE-1:0] exp_n_dat_i,  //
-  output [DWE-1:0] exp_n_dat_o,  //
-  output [DWE-1:0] exp_n_dir_o,
-  input      [DWE-1:0] exp_p_dat_i,  // exp. con. input data
-  output [DWE-1:0] exp_p_dat_o,  // exp. con. output data
-  output [DWE-1:0] exp_p_dir_o,  // exp. con. 1-output enable
+
   // System bus
   input      [ 32-1: 0] sys_addr  ,  // bus address
   input      [ 32-1: 0] sys_wdata ,  // bus write data
@@ -161,7 +154,6 @@ red_pitaya_adv_trigger adv_trig_b (
     .hysteresis_i (at_counts_b)//stay on for hysteresis_i cycles
     );
 
-reg [32-1:0] trigger_delay;
 
 
 red_pitaya_asg_ch  #(.RSZ (RSZ)) ch [1:0] (
@@ -199,41 +191,6 @@ red_pitaya_asg_ch  #(.RSZ (RSZ)) ch [1:0] (
 );
 
 
-//reg [32:0] count;
-//reg GPIO;
-wire edge_input;
-wire overflow;
-wire out;
-/*always @(posedge dac_clk_i) begin
-    if (count<trigger_delay) begin
-        count <= count + 1;
-    end else begin
-        count <= 32'b0;
-        GPIO <= GPIO+1;
-    end
-end*/
-
-assign exp_n_dir_o = 8'b1;
-assign exp_p_dir_o = 8'b1;
-
-edge_detect e1(
-	.A(exp_n_dat_i[1]),
-	.clk(dac_clk_i),
-	.OUT(edge_input)
-	);
-counter c(
-    .clk(dac_clk_i),
-    .is_counting(edge_input),
-    .N(trigger_delay),
-    .overflow(overflow)
-);
-edge_detect e2(
-    .A(overflow),
-    .clk(dac_clk_i),
-    .OUT(out)
-);
-assign exp_n_dat_o = overflow;
-assign exp_p_dat_o = out;
 
 reg  [RSZ-1: 0] trigbuf_rp_a       ;
 reg  [RSZ-1: 0] trigbuf_rp_b       ;
@@ -314,8 +271,9 @@ if (dac_rstn_i == 1'b0) begin
 
    rand_a_on <= 1'b0;
    rand_b_on <= 1'b0;
-   
-   trigger_delay <= 32'hf;
+   exp_n_dat_o  <= {DWE{1'b0}};
+   exp_n_dir_o  <= {DWE{1'b0}};
+
 end else begin
    trig_a_sw  <= sys_wen && (sys_addr[19:0]==20'h0) && sys_wdata[0]  ;
    if (sys_wen && (sys_addr[19:0]==20'h0))
@@ -351,7 +309,6 @@ end else begin
       if (sys_addr[19:0]==20'h11C)  at_counts_a[64-1:32] <= sys_wdata[32-1: 0] ;
       if (sys_addr[19:0]==20'h138)  at_counts_b[32-1:0]  <= sys_wdata[32-1: 0] ;
       if (sys_addr[19:0]==20'h13C)  at_counts_b[64-1:32] <= sys_wdata[32-1: 0] ;
-      if (sys_addr[19:0]==20'h240)  trigger_delay <= sys_wdata[32-1: 0] ;
 
    end
 
@@ -405,7 +362,6 @@ end else begin
      20'h00134 : begin sys_ack <= sys_en;          sys_rdata <= {{32-RSZ-2{1'b0}},trigbuf_rp_b}    ; end
      20'h00138 : begin sys_ack <= sys_en;          sys_rdata <= at_counts_b[32-1:0]     ; end
      20'h0013C : begin sys_ack <= sys_en;          sys_rdata <= at_counts_b[64-1:32]     ; end
-     20'h00240 : begin sys_ack <= sys_en;          sys_rdata <= trigger_delay     ; end
 
 	 20'h1zzzz : begin sys_ack <= ack_dly;         sys_rdata <= {{32-14{1'b0}},buf_a_rdata}        ; end
      20'h2zzzz : begin sys_ack <= ack_dly;         sys_rdata <= {{32-14{1'b0}},buf_b_rdata}        ; end
