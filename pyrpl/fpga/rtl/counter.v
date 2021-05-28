@@ -1,23 +1,49 @@
 module counter (
 	input clk,
-	input is_counting,
-	input N,
-	output overflow
+	input start,
+	input [31:0] N,
+	output reg [1:0] overflow
 );
-	reg [32:0] count;
-	reg out;
+    parameter  Zero=3'b000,
+    Counting=3'b010, 
+    Overflow=3'b011;
+    reg [2:0] current_state, next_state;
+	reg [31:0] count;
 	always @(posedge clk) begin
-		if (is_counting == 1'b1) begin
-			count <= 32'b0;
-			out <= 1'b0;
-		end else begin
-            if (count<N) begin
-				count <= count +1;
-			end else begin
-                out <= 1'b1;
-            end
-		end
-	end
-	assign overflow = out;
-	
-endmodule 
+		current_state <= next_state;
+		if(current_state==Counting)
+		count<=count+1;
+		else
+		count<=32'b0;
+    end
+    always @(current_state, start, clk)
+    begin
+    case(current_state) 
+    Zero:begin
+    if(start==1)
+    next_state = Counting;
+    else
+    next_state = Zero;
+    end
+    Counting:begin
+    if(count>=N)
+    next_state = Overflow;
+    end
+    Overflow:begin
+    next_state = Zero;
+    end 
+    default:next_state = Zero;
+    endcase
+    end
+    // combinational logic to determine the output
+    // of the Moore FSM, output only depends on current state
+    always @(current_state)
+    begin 
+    case(current_state) 
+    Zero:   overflow = 2'b00;
+    Counting:   overflow = 2'b01;
+    Overflow:  overflow = 2'b10;
+    default:  overflow = 2'b00;
+    endcase
+    end 
+endmodule

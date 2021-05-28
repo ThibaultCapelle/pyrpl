@@ -1,8 +1,8 @@
 Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2015.4 (lin64) Build 1412921 Wed Nov 18 09:44:32 MST 2015
-| Date             : Wed Dec 12 13:10:05 2018
-| Host             : LPC running 64-bit Ubuntu 16.04.4 LTS
+| Date             : Fri May 28 15:44:51 2021
+| Host             : usera-computer running 64-bit Ubuntu 20.04.2 LTS
 | Command          : report_power -file out/post_synth_power.rpt
 | Design           : red_pitaya_top
 | Device           : xc7z010clg400-1
@@ -30,8 +30,8 @@ Table of Contents
 ----------
 
 +--------------------------+-------+
-| Total On-Chip Power (W)  | 2.333 |
-| Dynamic (W)              | 2.180 |
+| Total On-Chip Power (W)  | 2.328 |
+| Dynamic (W)              | 2.176 |
 | Device Static (W)        | 0.153 |
 | Effective TJA (C/W)      | 11.5  |
 | Max Ambient (C)          | 58.1  |
@@ -50,24 +50,24 @@ Table of Contents
 | On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
 +--------------------------+-----------+----------+-----------+-----------------+
 | Clocks                   |     0.075 |       15 |       --- |             --- |
-| Slice Logic              |     0.142 |    36406 |       --- |             --- |
-|   LUT as Logic           |     0.120 |    17173 |     17600 |           97.57 |
-|   CARRY4                 |     0.016 |     1455 |      4400 |           33.07 |
-|   Register               |     0.005 |    13958 |     35200 |           39.65 |
+| Slice Logic              |     0.143 |    36699 |       --- |             --- |
+|   LUT as Logic           |     0.121 |    17312 |     17600 |           98.36 |
+|   CARRY4                 |     0.016 |     1467 |      4400 |           33.34 |
+|   Register               |     0.005 |    14044 |     35200 |           39.90 |
 |   F7/F8 Muxes            |    <0.001 |      566 |     17600 |            3.22 |
 |   LUT as Shift Register  |    <0.001 |       72 |      6000 |            1.20 |
-|   Others                 |     0.000 |      445 |       --- |             --- |
+|   Others                 |     0.000 |      455 |       --- |             --- |
 |   BUFG                   |     0.000 |        1 |        32 |            3.13 |
 |   LUT as Distributed RAM |     0.000 |       24 |      6000 |            0.40 |
-| Signals                  |     0.139 |    30536 |       --- |             --- |
+| Signals                  |     0.139 |    30781 |       --- |             --- |
 | Block RAM                |     0.103 |       34 |        60 |           56.67 |
 | PLL                      |     0.097 |        1 |         2 |           50.00 |
-| DSPs                     |     0.040 |       46 |        80 |           57.50 |
-| I/O                      |     0.288 |       95 |       100 |           95.00 |
+| DSPs                     |     0.041 |       47 |        80 |           58.75 |
+| I/O                      |     0.281 |       95 |       100 |           95.00 |
 | XADC                     |     0.004 |        1 |       --- |             --- |
 | PS7                      |     1.292 |        1 |       --- |             --- |
 | Static Power             |     0.153 |          |           |                 |
-| Total                    |     2.332 |          |           |                 |
+| Total                    |     2.328 |          |           |                 |
 +--------------------------+-----------+----------+-----------+-----------------+
 
 
@@ -77,9 +77,9 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
 +-----------+-------------+-----------+-------------+------------+
-| Vccint    |       1.000 |     0.508 |       0.497 |      0.011 |
+| Vccint    |       1.000 |     0.510 |       0.500 |      0.011 |
 | Vccaux    |       1.800 |     0.069 |       0.057 |      0.012 |
-| Vcco33    |       3.300 |     0.085 |       0.084 |      0.001 |
+| Vcco33    |       3.300 |     0.083 |       0.082 |      0.001 |
 | Vcco25    |       2.500 |     0.001 |       0.000 |      0.001 |
 | Vcco18    |       1.800 |     0.002 |       0.001 |      0.001 |
 | Vcco15    |       1.500 |     0.001 |       0.000 |      0.001 |
@@ -90,7 +90,7 @@ Table of Contents
 | MGTAVcc   |       1.000 |     0.000 |       0.000 |      0.000 |
 | MGTAVtt   |       1.200 |     0.000 |       0.000 |      0.000 |
 | MGTVccaux |       1.800 |     0.000 |       0.000 |      0.000 |
-| Vccpint   |       1.000 |     0.717 |       0.678 |      0.039 |
+| Vccpint   |       1.000 |     0.716 |       0.678 |      0.039 |
 | Vccpaux   |       1.800 |     0.038 |       0.027 |      0.010 |
 | Vccpll    |       1.800 |     0.017 |       0.014 |      0.003 |
 | Vcco_ddr  |       1.500 |     0.356 |       0.354 |      0.002 |
@@ -165,15 +165,17 @@ Table of Contents
 +----------------------------------------------------------------------------------+-----------+
 | Name                                                                             | Power (W) |
 +----------------------------------------------------------------------------------+-----------+
-| red_pitaya_top                                                                   |     2.180 |
+| red_pitaya_top                                                                   |     2.175 |
 |   i_ams                                                                          |     0.001 |
-|   i_asg                                                                          |     0.060 |
-|     adv_trig_a                                                                   |     0.002 |
-|     adv_trig_b                                                                   |     0.002 |
+|   i_asg                                                                          |     0.061 |
+|     adv_trig_a                                                                   |     0.001 |
+|     adv_trig_b                                                                   |     0.001 |
+|     c1                                                                           |    <0.001 |
 |     ch[0]                                                                        |     0.025 |
 |     ch[1]                                                                        |     0.025 |
+|     e3                                                                           |    <0.001 |
 |     prng                                                                         |     0.002 |
-|   i_dsp                                                                          |     0.334 |
+|   i_dsp                                                                          |     0.336 |
 |     dac_saturate[0]                                                              |    <0.001 |
 |     dac_saturate[1]                                                              |    <0.001 |
 |     genblk2[0].i_pid                                                             |     0.025 |
@@ -263,23 +265,24 @@ Table of Contents
 |         q0_product_and_sat                                                       |     0.002 |
 |         sumsaturation                                                            |    <0.001 |
 |       pfd_block                                                                  |    <0.001 |
-|   i_hk                                                                           |     0.001 |
+|     mult                                                                         |     0.002 |
+|   i_hk                                                                           |    <0.001 |
 |   i_iobufn[0]                                                                    |    <0.001 |
-|   i_iobufn[1]                                                                    |    <0.001 |
-|   i_iobufn[2]                                                                    |    <0.001 |
-|   i_iobufn[3]                                                                    |    <0.001 |
-|   i_iobufn[4]                                                                    |    <0.001 |
-|   i_iobufn[5]                                                                    |    <0.001 |
-|   i_iobufn[6]                                                                    |    <0.001 |
-|   i_iobufn[7]                                                                    |    <0.001 |
+|   i_iobufn[1]                                                                    |     0.000 |
+|   i_iobufn[2]                                                                    |     0.000 |
+|   i_iobufn[3]                                                                    |     0.000 |
+|   i_iobufn[4]                                                                    |     0.000 |
+|   i_iobufn[5]                                                                    |     0.000 |
+|   i_iobufn[6]                                                                    |     0.000 |
+|   i_iobufn[7]                                                                    |     0.000 |
 |   i_iobufp[0]                                                                    |    <0.001 |
-|   i_iobufp[1]                                                                    |    <0.001 |
-|   i_iobufp[2]                                                                    |    <0.001 |
-|   i_iobufp[3]                                                                    |    <0.001 |
-|   i_iobufp[4]                                                                    |    <0.001 |
-|   i_iobufp[5]                                                                    |    <0.001 |
-|   i_iobufp[6]                                                                    |    <0.001 |
-|   i_iobufp[7]                                                                    |    <0.001 |
+|   i_iobufp[1]                                                                    |     0.000 |
+|   i_iobufp[2]                                                                    |     0.000 |
+|   i_iobufp[3]                                                                    |     0.000 |
+|   i_iobufp[4]                                                                    |     0.000 |
+|   i_iobufp[5]                                                                    |     0.000 |
+|   i_iobufp[6]                                                                    |     0.000 |
+|   i_iobufp[7]                                                                    |     0.000 |
 |   i_ps                                                                           |     1.327 |
 |     axi_master[0]                                                                |     0.001 |
 |       axi_awfifo_reg_0_15_30_35                                                  |    <0.001 |

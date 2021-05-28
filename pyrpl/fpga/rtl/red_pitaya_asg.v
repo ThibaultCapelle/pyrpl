@@ -162,6 +162,7 @@ red_pitaya_adv_trigger adv_trig_b (
     );
 
 reg [32-1:0] trigger_delay;
+reg [32-1:0] pulse_width;
 
 
 red_pitaya_asg_ch  #(.RSZ (RSZ)) ch [1:0] (
@@ -202,7 +203,11 @@ red_pitaya_asg_ch  #(.RSZ (RSZ)) ch [1:0] (
 //reg [32:0] count;
 //reg GPIO;
 wire edge_input;
-wire overflow;
+wire edge_input_bis;
+wire edge_input_ter;
+wire [1:0] overflow;
+wire delayed_trigger;
+wire counting;
 wire out;
 /*always @(posedge dac_clk_i) begin
     if (count<trigger_delay) begin
@@ -216,24 +221,65 @@ end*/
 assign exp_n_dir_o = 8'b1;
 assign exp_p_dir_o = 8'b1;
 
-edge_detect e1(
+/*edge_detect e1(
 	.A(exp_n_dat_i[1]),
 	.clk(dac_clk_i),
 	.OUT(edge_input)
-	);
-counter c(
+	);*/
+edge_detect_holdoff e3(
+    .clock(dac_clk_i),
+    .sequence_in(exp_n_dat_i[1]),
+    .detector_out(edge_input)
+);
+counter c1(
     .clk(dac_clk_i),
-    .is_counting(edge_input),
+    .start(edge_input),
     .N(trigger_delay),
     .overflow(overflow)
 );
-edge_detect e2(
-    .A(overflow),
+/*counter c2(
     .clk(dac_clk_i),
-    .OUT(out)
+    .start(overflow),
+    .N(pulse_width),
+    .overflow(delayed_trigger)
+);*/
+/*edge_neg_detect_holdoff e4(
+    .clock(dac_clk_i),
+    .sequence_in(overflow),
+    .detector_out(edge_input_bis)
+);*/
+/*reg AA;
+reg A;
+always @(posedge dac_clk_i) begin
+    AA <= A;
+    A <= overflow;
+end
+
+assign edge_input_bis = AA && !A;
+pulse p1(
+    .start(edge_input_bis),
+    .clk(dac_clk_i),
+    .OUT(delayed_trigger)
+);*/
+/*wire new_clk;
+derived_clock c1(
+    .N(32'hff),
+    .clk(dac_clk_i),
+    .OUT(new_clk)
 );
-assign exp_n_dat_o = overflow;
-assign exp_p_dat_o = out;
+edge_detect_holdoff e3(
+    .clock(new_clk),
+    .sequence_in(out),
+    .detector_out(edge_input_ter)
+);*/
+/*
+edge_detect e3(
+    .A(out),
+    .clk(new_clk),
+    .OUT(edge_input_ter)
+);*/
+assign exp_n_dat_o = overflow[0];//exp_n_dat_i[1];
+assign exp_p_dat_o = overflow[1];
 
 reg  [RSZ-1: 0] trigbuf_rp_a       ;
 reg  [RSZ-1: 0] trigbuf_rp_b       ;
@@ -316,6 +362,7 @@ if (dac_rstn_i == 1'b0) begin
    rand_b_on <= 1'b0;
    
    trigger_delay <= 32'hf;
+   pulse_width <= 32'hf;
 end else begin
    trig_a_sw  <= sys_wen && (sys_addr[19:0]==20'h0) && sys_wdata[0]  ;
    if (sys_wen && (sys_addr[19:0]==20'h0))
@@ -352,6 +399,7 @@ end else begin
       if (sys_addr[19:0]==20'h138)  at_counts_b[32-1:0]  <= sys_wdata[32-1: 0] ;
       if (sys_addr[19:0]==20'h13C)  at_counts_b[64-1:32] <= sys_wdata[32-1: 0] ;
       if (sys_addr[19:0]==20'h240)  trigger_delay <= sys_wdata[32-1: 0] ;
+      if (sys_addr[19:0]==20'h248)  pulse_width <= sys_wdata[32-1: 0] ;
 
    end
 
@@ -406,6 +454,7 @@ end else begin
      20'h00138 : begin sys_ack <= sys_en;          sys_rdata <= at_counts_b[32-1:0]     ; end
      20'h0013C : begin sys_ack <= sys_en;          sys_rdata <= at_counts_b[64-1:32]     ; end
      20'h00240 : begin sys_ack <= sys_en;          sys_rdata <= trigger_delay     ; end
+     20'h00248 : begin sys_ack <= sys_en;          sys_rdata <= pulse_width     ; end
 
 	 20'h1zzzz : begin sys_ack <= ack_dly;         sys_rdata <= {{32-14{1'b0}},buf_a_rdata}        ; end
      20'h2zzzz : begin sys_ack <= ack_dly;         sys_rdata <= {{32-14{1'b0}},buf_b_rdata}        ; end

@@ -156,8 +156,8 @@ wire            module_ack   [MODULES-1:0];
 assign scope1_o = input_signal[SCOPE1];
 assign scope2_o = input_signal[SCOPE2];
 
-wire      [ 14-1: 0] mult_out;
-/*multiplicator #(
+//wire      [ 14-1: 0] mult_out;
+multiplicator #(
     .INBITS1(14),
     .INBITS2(14),
     .OUTBITS(14))
@@ -166,14 +166,14 @@ wire      [ 14-1: 0] mult_out;
     .clk_i(clk_i),
     .signal1_i(asg1_i),
     .signal2_i(asg2_i),
-    .signal_o(mult_out)
-    );*/
-assign mult_out = 14'hfff;
+    .signal_o(output_direct[ASG1])
+    );
+//assign mult_out = 14'hfff;
 
 //connect asg output
 assign output_signal[ASG1] = asg1_i;
 assign output_signal[ASG2] = asg2_i;
-assign output_direct[ASG1] = asg1_i;
+//assign output_direct[ASG1] = asg1_i;
 assign output_direct[ASG2] = asg2_i;
 
 //connect dac/adc to internal signals

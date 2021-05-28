@@ -91,6 +91,14 @@ read_verilog                      $path_rtl/red_pitaya_iq_fgen_block.v
 read_verilog                      $path_rtl/red_pitaya_iq_block.v
 read_verilog                      $path_rtl/red_pitaya_trigger_block.v
 read_verilog                      $path_rtl/red_pitaya_prng.v
+read_verilog                      $path_rtl/edge_detect.v
+read_verilog                      $path_rtl/counter.v
+read_verilog                      $path_rtl/multiplicator.v
+read_verilog                      $path_rtl/pulse.v
+read_verilog                      $path_rtl/edge_detect_holdoff.v
+read_verilog                      $path_rtl/edge_neg_detect_holdoff.v
+read_verilog                      $path_rtl/derived_clock.v
+
 
 #constraints
 read_xdc                          $path_sdc/red_pitaya.xdc
