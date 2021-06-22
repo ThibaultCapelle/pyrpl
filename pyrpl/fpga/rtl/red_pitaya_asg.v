@@ -237,6 +237,7 @@ counter c1(
     .N(trigger_delay),
     .overflow(overflow)
 );
+
 /*counter c2(
     .clk(dac_clk_i),
     .start(overflow),
@@ -280,6 +281,7 @@ edge_detect e3(
 );*/
 assign exp_n_dat_o = overflow[0];//exp_n_dat_i[1];
 assign exp_p_dat_o = overflow[1];
+
 
 reg  [RSZ-1: 0] trigbuf_rp_a       ;
 reg  [RSZ-1: 0] trigbuf_rp_b       ;
