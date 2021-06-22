@@ -16,7 +16,7 @@ module counter (
 		else
 		count<=32'b0;
     end
-    always @(current_state, start, clk)
+    always @(current_state, start)
     begin
     case(current_state) 
     Zero:begin
