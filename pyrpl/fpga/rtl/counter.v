@@ -12,7 +12,7 @@ module counter (
 	always @(posedge clk) begin
 		current_state <= next_state;
 		if(current_state==Counting)
-		count<=count+1;
+		count<=count+32'b1;
 		else
 		count<=32'b0;
     end
@@ -26,7 +26,7 @@ module counter (
     next_state = Zero;
     end
     Counting:begin
-    if(count>=N)
+    if(count==N)
     next_state = Overflow;
     end
     Overflow:begin
