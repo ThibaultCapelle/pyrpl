@@ -144,11 +144,11 @@ class Driver:
         self.pin.set_state(0)
     
     def set_trigger_delay(self, delay=None):
-        FPGA_val=int(delay*250e6)
+        FPGA_val=int(delay*125e6)
         self.write_reg(0x40200000, 0x240, val=FPGA_val)
     
     def get_trigger_delay(self):
-        return self.write_reg(0x40200000, 0x240)/250e6
+        return self.write_reg(0x40200000, 0x240)/125e6
     
     def set_frequency(self, val=None):
         FPGA_val=int(val/125e6*(2**32))

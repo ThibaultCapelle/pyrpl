@@ -239,6 +239,12 @@ counter_simple c1(
     .N(trigger_delay),
     .count(count_reg)
 );
+
+edge_detect e1(
+	.clock(dac_clk_i),
+	.sequence_in((count_reg==32'b0)),
+	.detector_out(edge_input_bis)
+);
 /*
 counter c1(
     .clk(dac_clk_i),
@@ -290,7 +296,7 @@ edge_detect e3(
     .OUT(edge_input_ter)
 );*/
 assign exp_n_dat_o = (count_reg==32'b0);//exp_n_dat_i[1];
-assign exp_p_dat_o = (count_reg==32'b0);
+assign exp_p_dat_o = edge_input_bis;
 
 
 reg  [RSZ-1: 0] trigbuf_rp_a       ;
