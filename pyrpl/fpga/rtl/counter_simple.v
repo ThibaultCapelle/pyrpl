@@ -16,5 +16,5 @@ module counter_simple (
 				count<=count-1;
 			end
 		end
-	overflow = count==0;
+	overflow = (count==32'b0);
 endmodule
