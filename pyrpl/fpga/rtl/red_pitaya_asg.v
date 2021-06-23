@@ -279,7 +279,7 @@ edge_detect e3(
     .clk(new_clk),
     .OUT(edge_input_ter)
 );*/
-assign exp_n_dat_o = overflow[0];//exp_n_dat_i[1];
+assign exp_n_dat_o = trigger_delay==32'hee6b280;//overflow[0];//exp_n_dat_i[1];
 assign exp_p_dat_o = overflow[1];
 
 
