@@ -231,12 +231,22 @@ edge_detect_holdoff e3(
     .sequence_in(exp_n_dat_i[1]),
     .detector_out(edge_input)
 );
+
+counter_simple c1(
+    .clk(dac_clk_i),
+    .start(edge_input),
+	.timer_tick(dac_clk_i),
+    .N(trigger_delay),
+    .overflow(overflow)
+);
+/*
 counter c1(
     .clk(dac_clk_i),
     .start(edge_input),
     .N(trigger_delay),
     .overflow(overflow)
-);
+);*/
+
 
 /*counter c2(
     .clk(dac_clk_i),
@@ -279,7 +289,7 @@ edge_detect e3(
     .clk(new_clk),
     .OUT(edge_input_ter)
 );*/
-assign exp_n_dat_o = trigger_delay==32'hee6b280;//overflow[0];//exp_n_dat_i[1];
+assign exp_n_dat_o = overflow[0];//exp_n_dat_i[1];
 assign exp_p_dat_o = overflow[1];
 
 

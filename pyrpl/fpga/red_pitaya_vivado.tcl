@@ -93,6 +93,7 @@ read_verilog                      $path_rtl/red_pitaya_trigger_block.v
 read_verilog                      $path_rtl/red_pitaya_prng.v
 read_verilog                      $path_rtl/edge_detect.v
 read_verilog                      $path_rtl/counter.v
+read_verilog                      $path_rtl/counter_simple.v
 read_verilog                      $path_rtl/multiplicator.v
 read_verilog                      $path_rtl/pulse.v
 read_verilog                      $path_rtl/edge_detect_holdoff.v
