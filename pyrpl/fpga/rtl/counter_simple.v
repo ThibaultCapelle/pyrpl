@@ -7,7 +7,7 @@ module counter_simple (
 );
 
 	reg [31:0] timer_reg, timer_next;
-	wire counting;
+	reg counting_reg;
 
 	always @ (posedge clk)
 		timer_reg<=timer_next;
@@ -17,12 +17,12 @@ module counter_simple (
 			timer_next=N;
 		else if ((timer_tick) && (timer_reg != 0)) begin
 			timer_next=timer_reg-1;
-			counting=1;
+			counting_reg=1;
 			end
 		else begin
 			timer_next=timer_reg;
-			counting=0;
+			counting_reg=0;
 			end
 	end
-	assign overflow = {timer_reg==0,counting};
+	assign overflow = {timer_reg==0,counting_reg==1};
 endmodule
