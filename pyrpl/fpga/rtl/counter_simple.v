@@ -2,10 +2,8 @@ module counter_simple (
 	input clk,
 	input start,
 	input [31:0] N,
-	output reg overflow
+	output reg [31:0] count
 );
-
-	reg [31:0] count;
 
 	always @ (posedge clk or posedge start)
 		if (start) begin
@@ -16,5 +14,4 @@ module counter_simple (
 				count<=count-1;
 			end
 		end
-	overflow = (count==32'b0);
 endmodule

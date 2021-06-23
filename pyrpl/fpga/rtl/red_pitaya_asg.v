@@ -209,6 +209,7 @@ wire overflow;
 wire delayed_trigger;
 wire counting;
 wire out;
+reg [31:0] count;
 /*always @(posedge dac_clk_i) begin
     if (count<trigger_delay) begin
         count <= count + 1;
@@ -235,9 +236,8 @@ edge_detect_holdoff e3(
 counter_simple c1(
     .clk(dac_clk_i),
     .start(edge_input),
-	.timer_tick(dac_clk_i),
     .N(trigger_delay),
-    .overflow(overflow)
+    .count(count)
 );
 /*
 counter c1(
@@ -289,8 +289,8 @@ edge_detect e3(
     .clk(new_clk),
     .OUT(edge_input_ter)
 );*/
-assign exp_n_dat_o = overflow;//exp_n_dat_i[1];
-assign exp_p_dat_o = overflow;
+assign exp_n_dat_o = (count==32'b0);//exp_n_dat_i[1];
+assign exp_p_dat_o = (count==32'b0);
 
 
 reg  [RSZ-1: 0] trigbuf_rp_a       ;
