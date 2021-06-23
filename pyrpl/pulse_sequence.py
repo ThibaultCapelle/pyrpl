@@ -30,8 +30,8 @@ class Pin:
 
 class Server(Generic_Server):
     
-    def __init__(self, ip='172.24.3.104', port=9000):
-        super().__init__(ip=ip, port=port, serial_driver=Driver())
+    def __init__(self, ip='172.24.3.105', port=9000, initialize=True):
+        super().__init__(ip=ip, port=port, serial_driver=Driver(initialize=initialize))
 
 class Delayed_callback:
     
@@ -68,6 +68,14 @@ class Client(Generic_Client):
         self.send(self.parse('set_continuous_waveform()', waveform=waveform,
                              duration=duration, frequency=frequency))
     
+    @property
+    def trigger_delay(self):
+        return self.ask(self.parse('get_trigger_delay()'))
+    
+    @trigger_delay.setter
+    def trigger_delay(self, val):
+        self.send(self.parse('set_trigger_delay()', delay=val))
+    
     def trigger(self):
         self.send(self.parse('trigger()'))
     
@@ -87,10 +95,11 @@ class Client(Generic_Client):
 
 class Driver:
     
-    def __init__(self):
+    def __init__(self, initialize=True):
         #self.pin=Pin(0)
         #self.pin.set_state(0)
-        self.initialize()
+        if initialize:
+            self.initialize()
     
     def initialize(self):
         self.write_reg(0x40200000, 0x0, bitmask=0xffff, val=17)
@@ -133,6 +142,13 @@ class Driver:
     def trigger(self, pulse_id=None):
         self.pin.set_state(1)
         self.pin.set_state(0)
+    
+    def set_trigger_delay(self, delay=None):
+        FPGA_val=int(delay*250e6)
+        self.write_reg(0x40200000, 0x240, val=FPGA_val)
+    
+    def get_trigger_delay(self):
+        return self.write_reg(0x40200000, 0x240)/250e6
     
     def set_frequency(self, val=None):
         FPGA_val=int(val/125e6*(2**32))
@@ -266,7 +282,12 @@ class Driver:
 if __name__=='__main__':
     if len(sys.argv)>1:
         if sys.argv[1]=='server':
-            s=Server()
+            if len(sys.argv)==2:
+                s=Server()
+            elif sys.argv[2]=='init':
+                s=Server(initialize=True)
+            elif sys.argv[2]=='notinit':
+                s=Server(initialize=False)
         elif sys.argv[1]=='client':
             s=Client()
     else:
