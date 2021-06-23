@@ -200,8 +200,7 @@ red_pitaya_asg_ch  #(.RSZ (RSZ)) ch [1:0] (
 );
 
 
-//reg [32:0] count;
-//reg GPIO;
+
 wire edge_input;
 wire edge_input_bis;
 wire edge_input_ter;
@@ -210,23 +209,12 @@ wire delayed_trigger;
 wire counting;
 wire out;
 wire [31:0] count_reg;
-/*always @(posedge dac_clk_i) begin
-    if (count<trigger_delay) begin
-        count <= count + 1;
-    end else begin
-        count <= 32'b0;
-        GPIO <= GPIO+1;
-    end
-end*/
+
 
 assign exp_n_dir_o = 8'b1;
 assign exp_p_dir_o = 8'b1;
 
-/*edge_detect e1(
-	.A(exp_n_dat_i[1]),
-	.clk(dac_clk_i),
-	.OUT(edge_input)
-	);*/
+
 edge_detect_holdoff e3(
     .clock(dac_clk_i),
     .sequence_in(exp_n_dat_i[1]),
@@ -245,57 +233,8 @@ edge_detect_holdoff e1(
     .sequence_in(count_reg==32'b0),
     .detector_out(edge_input_bis)
 );
-/*
-counter c1(
-    .clk(dac_clk_i),
-    .start(edge_input),
-    .N(trigger_delay),
-    .overflow(overflow)
-);*/
 
-
-/*counter c2(
-    .clk(dac_clk_i),
-    .start(overflow),
-    .N(pulse_width),
-    .overflow(delayed_trigger)
-);*/
-/*edge_neg_detect_holdoff e4(
-    .clock(dac_clk_i),
-    .sequence_in(overflow),
-    .detector_out(edge_input_bis)
-);*/
-/*reg AA;
-reg A;
-always @(posedge dac_clk_i) begin
-    AA <= A;
-    A <= overflow;
-end
-
-assign edge_input_bis = AA && !A;
-pulse p1(
-    .start(edge_input_bis),
-    .clk(dac_clk_i),
-    .OUT(delayed_trigger)
-);*/
-/*wire new_clk;
-derived_clock c1(
-    .N(32'hff),
-    .clk(dac_clk_i),
-    .OUT(new_clk)
-);
-edge_detect_holdoff e3(
-    .clock(new_clk),
-    .sequence_in(out),
-    .detector_out(edge_input_ter)
-);*/
-/*
-edge_detect e3(
-    .A(out),
-    .clk(new_clk),
-    .OUT(edge_input_ter)
-);*/
-assign exp_n_dat_o = (count_reg==32'b0);//exp_n_dat_i[1];
+assign exp_n_dat_o = (count_reg==32'b0);
 assign exp_p_dat_o = edge_input_bis;
 
 
