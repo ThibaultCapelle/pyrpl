@@ -240,10 +240,10 @@ counter_simple c1(
     .count(count_reg)
 );
 
-edge_detect e1(
-	.A((count_reg==32'b0)),
-	.clk(dac_clk_i),
-	.OUT(edge_input_bis)
+edge_detect_holdoff e1(
+	.clock(dac_clk_i),
+    .sequence_in(count_reg==32'b0),
+    .detector_out(edge_input_bis)
 );
 /*
 counter c1(
