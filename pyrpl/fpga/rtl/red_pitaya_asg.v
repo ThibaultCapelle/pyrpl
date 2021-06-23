@@ -289,8 +289,8 @@ edge_detect e3(
     .clk(new_clk),
     .OUT(edge_input_ter)
 );*/
-assign exp_n_dat_o = (count==32'b0);//exp_n_dat_i[1];
-assign exp_p_dat_o = (count==32'b0);
+assign exp_n_dat_o = (count_reg==32'b0);//exp_n_dat_i[1];
+assign exp_p_dat_o = (count_reg==32'b0);
 
 
 reg  [RSZ-1: 0] trigbuf_rp_a       ;
