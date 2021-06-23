@@ -209,7 +209,7 @@ wire overflow;
 wire delayed_trigger;
 wire counting;
 wire out;
-reg [31:0] count;
+wire [31:0] count_reg;
 /*always @(posedge dac_clk_i) begin
     if (count<trigger_delay) begin
         count <= count + 1;
@@ -237,7 +237,7 @@ counter_simple c1(
     .clk(dac_clk_i),
     .start(edge_input),
     .N(trigger_delay),
-    .count(count)
+    .count(count_reg)
 );
 /*
 counter c1(
