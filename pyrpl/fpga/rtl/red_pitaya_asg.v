@@ -205,7 +205,7 @@ red_pitaya_asg_ch  #(.RSZ (RSZ)) ch [1:0] (
 wire edge_input;
 wire edge_input_bis;
 wire edge_input_ter;
-wire [1:0] overflow;
+wire overflow;
 wire delayed_trigger;
 wire counting;
 wire out;
@@ -289,8 +289,8 @@ edge_detect e3(
     .clk(new_clk),
     .OUT(edge_input_ter)
 );*/
-assign exp_n_dat_o = overflow[0];//exp_n_dat_i[1];
-assign exp_p_dat_o = overflow[1];
+assign exp_n_dat_o = overflow;//exp_n_dat_i[1];
+assign exp_p_dat_o = overflow;
 
 
 reg  [RSZ-1: 0] trigbuf_rp_a       ;

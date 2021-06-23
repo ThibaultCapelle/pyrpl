@@ -1,28 +1,20 @@
 module counter_simple (
 	input clk,
 	input start,
-	input timer_tick,
 	input [31:0] N,
-	output wire [1:0] overflow
+	output reg overflow
 );
 
-	reg [31:0] timer_reg, timer_next;
-	reg counting_reg;
+	reg [31:0] count;
 
-	always @ (posedge clk)
-		timer_reg<=timer_next;
-
-	always @ (*) begin
-		if (start)
-			timer_next=N;
-		else if ((timer_tick) && (timer_reg != 0)) begin
-			timer_next=timer_reg-1;
-			counting_reg=1;
-			end
+	always @ (posedge clk or posedge start)
+		if (start) begin
+			count<=N;
+		end
 		else begin
-			timer_next=timer_reg;
-			counting_reg=0;
+			if (count>0) begin
+				count<=count-1;
 			end
-	end
-	assign overflow = {timer_reg==0,counting_reg==1};
+		end
+	overflow = count==0;
 endmodule
