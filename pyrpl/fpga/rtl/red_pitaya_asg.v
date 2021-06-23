@@ -241,9 +241,9 @@ counter_simple c1(
 );
 
 edge_detect e1(
-	.clock(dac_clk_i),
-	.sequence_in((count_reg==32'b0)),
-	.detector_out(edge_input_bis)
+	.A((count_reg==32'b0)),
+	.clk(dac_clk_i),
+	.OUT(edge_input_bis)
 );
 /*
 counter c1(
