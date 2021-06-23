@@ -12,13 +12,15 @@ reg counting
 always @ (posedge clk)
 	timer_reg<=timer_next;
 
-always @ *
+always @*
 	if (start)
 		timer_next=N;
-	else if ((timer_tick) && (timer_reg != 0)) 
+	else if ((timer_tick) && (timer_reg != 0)) begin
 		timer_next=timer_reg-1;
 		counting=1;
-	else
+		end
+	else begin
 		timer_next=timer_reg;
 		counting=0;
+		end
 assign overflow = {timer_reg==0,counting==1};
