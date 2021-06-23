@@ -30,7 +30,7 @@ class Pin:
 
 class Server(Generic_Server):
     
-    def __init__(self, ip='172.24.3.105', port=9000):
+    def __init__(self, ip='172.24.3.104', port=9000):
         super().__init__(ip=ip, port=port, serial_driver=Driver())
 
 class Delayed_callback:
@@ -52,7 +52,7 @@ class Delayed_callback:
 
 class Client(Generic_Client):
     
-    def __init__(self, ip='172.24.3.105', port=9000):
+    def __init__(self, ip='172.24.3.104', port=9000):
         super().__init__(ip=ip, port=port)
     
     def write_reg(self, adress_base=None, offset=None, bitmask=None, val=None):
