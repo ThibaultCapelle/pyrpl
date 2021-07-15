@@ -100,6 +100,8 @@ class Driver:
         #self.pin.set_state(0)
         if initialize:
             self.initialize()
+        else:
+            pass
     
     def initialize(self):
         self.write_reg(0x40200000, 0x0, bitmask=0xffff, val=17)
