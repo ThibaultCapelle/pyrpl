@@ -30,8 +30,8 @@ class Pin:
 
 class Server(Generic_Server):
     
-    def __init__(self, ip='172.24.3.105', port=9000, initialize=True):
-        super().__init__(ip=ip, port=port, serial_driver=Driver(initialize=initialize))
+    def __init__(self, ip='172.24.3.105', port=9000):
+        super().__init__(ip=ip, port=port, serial_driver=Driver())
 
 class Delayed_callback:
     
@@ -95,13 +95,8 @@ class Client(Generic_Client):
 
 class Driver:
     
-    def __init__(self, initialize=True):
-        #self.pin=Pin(0)
-        #self.pin.set_state(0)
-        if initialize:
-            self.initialize()
-        else:
-            pass
+    def __init__(self):
+        pass
     
     def initialize(self):
         self.write_reg(0x40200000, 0x0, bitmask=0xffff, val=17)
@@ -286,10 +281,6 @@ if __name__=='__main__':
         if sys.argv[1]=='server':
             if len(sys.argv)==2:
                 s=Server()
-            elif sys.argv[2]=='init':
-                s=Server(initialize=True)
-            elif sys.argv[2]=='notinit':
-                s=Server(initialize=False)
         elif sys.argv[1]=='client':
             s=Client()
     else:
