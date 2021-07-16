@@ -167,7 +167,7 @@ reg [1:0] count;
 
 always @(posedge dac_clk_i) begin
 	if (dac_rstn_i == 1'b0) begin
-		  count <= {RSZ{2'b0}} ;
+		  count <= 2'b0;
 		  end
 	else begin
 		count<=count+2'b1;
