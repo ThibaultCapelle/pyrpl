@@ -163,6 +163,16 @@ red_pitaya_adv_trigger adv_trig_b (
 
 reg [32-1:0] trigger_delay;
 reg [32-1:0] pulse_width;
+reg [1:0] count;
+
+always @(posedge dac_clk_i) begin
+	if (dac_rstn_i == 1'b0) begin
+		  count <= {RSZ{2'b0}} ;
+		  end
+	else begin
+		count<=count+2'b1;
+		end
+end
 
 
 red_pitaya_asg_ch  #(.RSZ (RSZ)) ch [1:0] (
@@ -214,7 +224,7 @@ wire [31:0] count_reg;
 assign exp_n_dir_o = 8'b1;
 assign exp_p_dir_o = 8'b1;
 
-
+/*
 edge_detect_holdoff e3(
     .clock(dac_clk_i),
     .sequence_in(exp_n_dat_i[1]),
@@ -232,11 +242,11 @@ edge_detect_holdoff e1(
 	.clock(dac_clk_i),
     .sequence_in(count_reg==32'b0),
     .detector_out(edge_input_bis)
-);
+);*/
 
-assign exp_n_dat_o = (count_reg==32'b0);
-assign exp_p_dat_o = edge_input_bis;
-
+//assign exp_n_dat_o = (count_reg==32'b0);
+//assign exp_p_dat_o = edge_input_bis;
+assign exp_n_dat_o = count[1];
 
 reg  [RSZ-1: 0] trigbuf_rp_a       ;
 reg  [RSZ-1: 0] trigbuf_rp_b       ;
