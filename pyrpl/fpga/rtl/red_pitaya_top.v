@@ -407,7 +407,7 @@ ODDR oddr_dac_dat [14-1:0] (.Q(dac_dat_o), .D1(dac_dat_b), .D2(dac_dat_a), .C(da
 wire  [  8-1: 0] exp_p_in , exp_n_in ;
 wire  [  8-1: 0] exp_p_out, exp_n_out;
 wire  [  8-1: 0] exp_p_dir, exp_n_dir;
-/*
+
 red_pitaya_hk i_hk (
   // system signals
   .clk_i           (  adc_clk                    ),  // clock
@@ -422,7 +422,7 @@ red_pitaya_hk i_hk (
   .exp_p_dir_o     (  exp_p_dir                  ),  // 1-output enable
   .exp_n_dat_i     (  exp_n_in                   ),
   .exp_n_dat_o     (  exp_n_out                  ),
-  .exp_n_dir_o     (  exp_n_dir                  ),*//*
+  .exp_n_dir_o     (  exp_n_dir                  ),*/
    // System bus
   .sys_addr        (  sys_addr                   ),  // address
   .sys_wdata       (  sys_wdata                  ),  // write data
@@ -433,7 +433,7 @@ red_pitaya_hk i_hk (
   .sys_err         (  sys_err[0]                 ),  // error indicator
   .sys_ack         (  sys_ack[0]                 )   // acknowledge signal
 );
-*/
+
 IOBUF i_iobufp [8-1:0] (.O(exp_p_in), .IO(exp_p_io), .I(exp_p_out), .T(~exp_p_dir) );
 IOBUF i_iobufn [8-1:0] (.O(exp_n_in), .IO(exp_n_io), .I(exp_n_out), .T(~exp_n_dir) );
 
@@ -523,7 +523,7 @@ red_pitaya_asg i_asg (
 
 //---------------------------------------------------------------------------------
 //  DSP module
-/*
+
 red_pitaya_dsp i_dsp (
    // signals
   .clk_i           (  adc_clk                    ),  // clock
@@ -556,7 +556,7 @@ red_pitaya_dsp i_dsp (
   .sys_err         (  sys_err[3]                 ),  // error indicator
   .sys_ack         (  sys_ack[3]                 )   // acknowledge signal
 );
-*/
+
 // the ams module has been obsoleted by PWM control via DSP module (outputs)
 // and by the fact that RedPitaya has migrated aux. inputs to be PS controlled
 // we keep the module to go back to FPGA controlled aux. inputs if needed
@@ -569,7 +569,7 @@ wire  [ 24-1: 0] pwm_cfg_a;
 wire  [ 24-1: 0] pwm_cfg_b;
 wire  [ 24-1: 0] pwm_cfg_c;
 wire  [ 24-1: 0] pwm_cfg_d;
-/*
+
 red_pitaya_ams i_ams (
    // power test
   .clk_i           (  adc_clk                    ),  // clock
@@ -592,9 +592,9 @@ red_pitaya_ams i_ams (
   .sys_ack         (  sys_ack[4]                 )   // acknowledge signal
 );
 
-*/
+
 wire  [ 14-1: 0] pwm_signals[4-1:0];
-/*
+
 red_pitaya_pwm pwm [4-1:0] (
   // system signals
   .clk   (pwm_clk ),
@@ -606,7 +606,7 @@ red_pitaya_pwm pwm [4-1:0] (
   .pwm_o (dac_pwm_o),
   .pwm_s ()
 );
-*/
+
 //---------------------------------------------------------------------------------
 //  Daisy chain
 //  simple communication module
