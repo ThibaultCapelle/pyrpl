@@ -332,10 +332,11 @@ wire pll_dac_clk_2p_2;
 wire pll_ser_clk_2;
 wire pll_pwm_clk_2;
 wire ext_in;
+wire pll_locked_2;
 
 IBUFDS i_clk_ext (.I (exp_p_in[2]), .IB (1'b0), .O (ext_in));
 
-red_pitaya_pll_ext pll (
+red_pitaya_pll_ext pll_2 (
   // inputs
   .clk         (ext_in),  // clock
   .rstn        (frstn[0]  ),  // reset - active low
@@ -347,7 +348,7 @@ red_pitaya_pll_ext pll (
   .clk_ser     (pll_ser_clk_2   ),  // fast serial clock
   .clk_pwm     (pll_pwm_clk_2   ),  // PWM clock
   // status outputs
-  .pll_locked  (pll_locked)
+  .pll_locked  (pll_locked_2)
 );
 
 BUFG bufg_adc_clk    (.O (adc_clk   ), .I (pll_adc_clk   ));
