@@ -310,9 +310,24 @@ wire                  digital_loop;
 // diferential clock input
 IBUFDS i_clk (.I (adc_clk_p_i), .IB (adc_clk_n_i), .O (adc_clk_in));  // differential clock input
 
-red_pitaya_pll pll (
+/*red_pitaya_pll pll (
   // inputs
   .clk         (adc_clk_in),  // clock
+  .rstn        (frstn[0]  ),  // reset - active low
+  // output clocks
+  .clk_adc     (pll_adc_clk   ),  // ADC clock
+  .clk_dac_1x  (pll_dac_clk_1x),  // DAC clock 125MHz
+  .clk_dac_2x  (pll_dac_clk_2x),  // DAC clock 250MHz
+  .clk_dac_2p  (pll_dac_clk_2p),  // DAC clock 250MHz -45DGR
+  .clk_ser     (pll_ser_clk   ),  // fast serial clock
+  .clk_pwm     (pll_pwm_clk   ),  // PWM clock
+  // status outputs
+  .pll_locked  (pll_locked)
+);*/
+
+red_pitaya_pll_ext pll (
+  // inputs
+  .clk         (exp_p_in[2]),  // clock
   .rstn        (frstn[0]  ),  // reset - active low
   // output clocks
   .clk_adc     (pll_adc_clk   ),  // ADC clock
@@ -392,7 +407,7 @@ ODDR oddr_dac_dat [14-1:0] (.Q(dac_dat_o), .D1(dac_dat_b), .D2(dac_dat_a), .C(da
 wire  [  8-1: 0] exp_p_in , exp_n_in ;
 wire  [  8-1: 0] exp_p_out, exp_n_out;
 wire  [  8-1: 0] exp_p_dir, exp_n_dir;
-
+/*
 red_pitaya_hk i_hk (
   // system signals
   .clk_i           (  adc_clk                    ),  // clock
@@ -401,13 +416,13 @@ red_pitaya_hk i_hk (
   .led_o           (  led_o                      ),  // LED output
   // global configuration
   .digital_loop    (  digital_loop               ),
-  // Expansion connector
+  // Expansion connector*/
   /*.exp_p_dat_i     (  exp_p_in                   ),  // input data
   .exp_p_dat_o     (  exp_p_out                  ),  // output data
   .exp_p_dir_o     (  exp_p_dir                  ),  // 1-output enable
   .exp_n_dat_i     (  exp_n_in                   ),
   .exp_n_dat_o     (  exp_n_out                  ),
-  .exp_n_dir_o     (  exp_n_dir                  ),*/
+  .exp_n_dir_o     (  exp_n_dir                  ),*//*
    // System bus
   .sys_addr        (  sys_addr                   ),  // address
   .sys_wdata       (  sys_wdata                  ),  // write data
@@ -418,7 +433,7 @@ red_pitaya_hk i_hk (
   .sys_err         (  sys_err[0]                 ),  // error indicator
   .sys_ack         (  sys_ack[0]                 )   // acknowledge signal
 );
-
+*/
 IOBUF i_iobufp [8-1:0] (.O(exp_p_in), .IO(exp_p_io), .I(exp_p_out), .T(~exp_p_dir) );
 IOBUF i_iobufn [8-1:0] (.O(exp_n_in), .IO(exp_n_io), .I(exp_n_out), .T(~exp_n_dir) );
 
@@ -508,7 +523,7 @@ red_pitaya_asg i_asg (
 
 //---------------------------------------------------------------------------------
 //  DSP module
-
+/*
 red_pitaya_dsp i_dsp (
    // signals
   .clk_i           (  adc_clk                    ),  // clock
@@ -541,7 +556,7 @@ red_pitaya_dsp i_dsp (
   .sys_err         (  sys_err[3]                 ),  // error indicator
   .sys_ack         (  sys_ack[3]                 )   // acknowledge signal
 );
-
+*/
 // the ams module has been obsoleted by PWM control via DSP module (outputs)
 // and by the fact that RedPitaya has migrated aux. inputs to be PS controlled
 // we keep the module to go back to FPGA controlled aux. inputs if needed
@@ -554,7 +569,7 @@ wire  [ 24-1: 0] pwm_cfg_a;
 wire  [ 24-1: 0] pwm_cfg_b;
 wire  [ 24-1: 0] pwm_cfg_c;
 wire  [ 24-1: 0] pwm_cfg_d;
-
+/*
 red_pitaya_ams i_ams (
    // power test
   .clk_i           (  adc_clk                    ),  // clock
@@ -577,9 +592,9 @@ red_pitaya_ams i_ams (
   .sys_ack         (  sys_ack[4]                 )   // acknowledge signal
 );
 
-
+*/
 wire  [ 14-1: 0] pwm_signals[4-1:0];
-
+/*
 red_pitaya_pwm pwm [4-1:0] (
   // system signals
   .clk   (pwm_clk ),
@@ -591,7 +606,7 @@ red_pitaya_pwm pwm [4-1:0] (
   .pwm_o (dac_pwm_o),
   .pwm_s ()
 );
-
+*/
 //---------------------------------------------------------------------------------
 //  Daisy chain
 //  simple communication module
