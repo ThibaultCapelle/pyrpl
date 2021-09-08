@@ -310,7 +310,7 @@ wire                  digital_loop;
 // diferential clock input
 IBUFDS i_clk (.I (adc_clk_p_i), .IB (adc_clk_n_i), .O (adc_clk_in));  // differential clock input
 
-/*red_pitaya_pll pll (
+red_pitaya_pll pll (
   // inputs
   .clk         (adc_clk_in),  // clock
   .rstn        (frstn[0]  ),  // reset - active low
@@ -323,19 +323,29 @@ IBUFDS i_clk (.I (adc_clk_p_i), .IB (adc_clk_n_i), .O (adc_clk_in));  // differe
   .clk_pwm     (pll_pwm_clk   ),  // PWM clock
   // status outputs
   .pll_locked  (pll_locked)
-);*/
+);
+
+wire pll_adc_clk_2;
+wire pll_dac_clk_1x;
+wire pll_dac_clk_2x_2;
+wire pll_dac_clk_2p_2;
+wire pll_ser_clk_2;
+wire pll_pwm_clk_2;
+wire ext_in;
+
+IBUFDS i_clk (.I (exp_p_in[2]), .IB (1'b0), .O (ext_in));
 
 red_pitaya_pll_ext pll (
   // inputs
-  .clk         (exp_p_in[2]),  // clock
+  .clk         (ext_in),  // clock
   .rstn        (frstn[0]  ),  // reset - active low
   // output clocks
-  .clk_adc     (pll_adc_clk   ),  // ADC clock
-  .clk_dac_1x  (pll_dac_clk_1x),  // DAC clock 125MHz
-  .clk_dac_2x  (pll_dac_clk_2x),  // DAC clock 250MHz
-  .clk_dac_2p  (pll_dac_clk_2p),  // DAC clock 250MHz -45DGR
-  .clk_ser     (pll_ser_clk   ),  // fast serial clock
-  .clk_pwm     (pll_pwm_clk   ),  // PWM clock
+  .clk_adc     (pll_adc_clk_2   ),  // ADC clock
+  .clk_dac_1x  (pll_dac_clk_1x_2),  // DAC clock 125MHz
+  .clk_dac_2x  (pll_dac_clk_2x_2),  // DAC clock 250MHz
+  .clk_dac_2p  (pll_dac_clk_2p_2),  // DAC clock 250MHz -45DGR
+  .clk_ser     (pll_ser_clk_2   ),  // fast serial clock
+  .clk_pwm     (pll_pwm_clk_2   ),  // PWM clock
   // status outputs
   .pll_locked  (pll_locked)
 );
@@ -407,6 +417,8 @@ ODDR oddr_dac_dat [14-1:0] (.Q(dac_dat_o), .D1(dac_dat_b), .D2(dac_dat_a), .C(da
 wire  [  8-1: 0] exp_p_in , exp_n_in ;
 wire  [  8-1: 0] exp_p_out, exp_n_out;
 wire  [  8-1: 0] exp_p_dir, exp_n_dir;
+
+assign exp_n_out=pll_adc_clk_2
 
 red_pitaya_hk i_hk (
   // system signals
