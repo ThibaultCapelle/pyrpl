@@ -333,8 +333,10 @@ wire pll_ser_clk_2;
 wire pll_pwm_clk_2;
 wire ext_in;
 wire pll_locked_2;
+wire test_clk;
 
 IBUFDS i_clk_ext (.I (exp_p_in[2]), .IB (1'b0), .O (ext_in));
+
 
 red_pitaya_pll_ext pll_2 (
   // inputs
@@ -419,7 +421,8 @@ wire  [  8-1: 0] exp_p_in , exp_n_in ;
 wire  [  8-1: 0] exp_p_out, exp_n_out;
 wire  [  8-1: 0] exp_p_dir, exp_n_dir;
 
-assign exp_n_out=pll_adc_clk_2;
+BUFG i_clk_ext_2 (.O (test_clk), .I (pll_adc_clk_2));
+assign exp_n_out=test_clk;
 
 red_pitaya_hk i_hk (
   // system signals
