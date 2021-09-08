@@ -333,7 +333,7 @@ wire pll_ser_clk_2;
 wire pll_pwm_clk_2;
 wire ext_in;
 
-IBUFDS i_clk (.I (exp_p_in[2]), .IB (1'b0), .O (ext_in));
+IBUFDS i_clk_ext (.I (exp_p_in[2]), .IB (1'b0), .O (ext_in));
 
 red_pitaya_pll_ext pll (
   // inputs
