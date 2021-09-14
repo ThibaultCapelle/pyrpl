@@ -215,7 +215,7 @@ wire new_clk;
 assign exp_n_dir_o = 8'b1;
 assign exp_p_dir_o = 8'b1;
 
-derived_clk TTL(
+derived_clock TTL(
     .N(32'd100),
     .clk(dac_clk_i),
     .rst_n(dac_rstn_i),
