@@ -162,7 +162,7 @@ red_pitaya_adv_trigger adv_trig_b (
     );
 
 reg [32-1:0] trigger_delay;
-reg [32-1:0] pulse_width;
+reg [32-1:0] frequency_divide;
 
 
 red_pitaya_asg_ch  #(.RSZ (RSZ)) ch [1:0] (
@@ -216,7 +216,7 @@ assign exp_n_dir_o = 8'b1;
 assign exp_p_dir_o = 8'b1;
 
 derived_clock TTL(
-    .N(32'd100),
+    .N(frequency_divide),
     .clk(dac_clk_i),
     .rst_n(dac_rstn_i),
     .output_clk(new_clk)
@@ -327,7 +327,7 @@ if (dac_rstn_i == 1'b0) begin
    rand_b_on <= 1'b0;
    
    trigger_delay <= 32'hf;
-   pulse_width <= 32'hf;
+   frequency_divide <= 32'd100;
 end else begin
    trig_a_sw  <= sys_wen && (sys_addr[19:0]==20'h0) && sys_wdata[0]  ;
    if (sys_wen && (sys_addr[19:0]==20'h0))
@@ -364,7 +364,7 @@ end else begin
       if (sys_addr[19:0]==20'h138)  at_counts_b[32-1:0]  <= sys_wdata[32-1: 0] ;
       if (sys_addr[19:0]==20'h13C)  at_counts_b[64-1:32] <= sys_wdata[32-1: 0] ;
       if (sys_addr[19:0]==20'h240)  trigger_delay <= sys_wdata[32-1: 0] ;
-      if (sys_addr[19:0]==20'h248)  pulse_width <= sys_wdata[32-1: 0] ;
+      if (sys_addr[19:0]==20'h248)  frequency_divide <= sys_wdata[32-1: 0] ;
 
    end
 
@@ -419,7 +419,7 @@ end else begin
      20'h00138 : begin sys_ack <= sys_en;          sys_rdata <= at_counts_b[32-1:0]     ; end
      20'h0013C : begin sys_ack <= sys_en;          sys_rdata <= at_counts_b[64-1:32]     ; end
      20'h00240 : begin sys_ack <= sys_en;          sys_rdata <= trigger_delay     ; end
-     20'h00248 : begin sys_ack <= sys_en;          sys_rdata <= pulse_width     ; end
+     20'h00248 : begin sys_ack <= sys_en;          sys_rdata <= frequency_divide     ; end
 
 	 20'h1zzzz : begin sys_ack <= ack_dly;         sys_rdata <= {{32-14{1'b0}},buf_a_rdata}        ; end
      20'h2zzzz : begin sys_ack <= ack_dly;         sys_rdata <= {{32-14{1'b0}},buf_b_rdata}        ; end

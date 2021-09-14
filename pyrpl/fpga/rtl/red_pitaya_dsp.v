@@ -381,7 +381,7 @@ endgenerate
 assign trig_o = trig_signal;
 
 //IIR module 
-generate for (j = 4; j < 5; j = j+1) begin
+/*generate for (j = 4; j < 5; j = j+1) begin
     red_pitaya_iir_block iir (
 	     // data
 	     .clk_i        (  clk_i          ),  // clock
@@ -398,7 +398,7 @@ generate for (j = 4; j < 5; j = j+1) begin
 	     .wdata (sys_wdata)
       );
 	  assign output_signal[j] = output_direct[j];
-end endgenerate
+end endgenerate*/
 
 
 //IQ modules
