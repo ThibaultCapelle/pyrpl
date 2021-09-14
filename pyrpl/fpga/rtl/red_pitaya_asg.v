@@ -209,11 +209,19 @@ wire delayed_trigger;
 wire counting;
 wire out;
 wire [31:0] count_reg;
+wire new_clk;
 
 
 assign exp_n_dir_o = 8'b1;
 assign exp_p_dir_o = 8'b1;
 
+derived_clk TTL(
+    .N(32'd100),
+    .clk(dac_clk_i),
+    .rst_n(dac_rstn_i),
+    .output_clk(new_clk)
+);
+    
 
 edge_detect_holdoff e3(
     .clock(dac_clk_i),
@@ -234,7 +242,7 @@ edge_detect_holdoff e1(
     .detector_out(edge_input_bis)
 );
 
-assign exp_n_dat_o = (count_reg==32'b0);
+assign exp_n_dat_o = new_clk;
 assign exp_p_dat_o = edge_input_bis;
 
 
