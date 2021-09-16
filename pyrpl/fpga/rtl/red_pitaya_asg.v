@@ -212,7 +212,7 @@ wire [31:0] count_reg;
 wire new_clk;
 
 
-assign exp_n_dir_o = 8'b1;
+assign exp_n_dir_o = 8'b100;
 assign exp_p_dir_o = 8'b1;
 
 derived_clock TTL(
@@ -242,7 +242,7 @@ edge_detect_holdoff e1(
     .detector_out(edge_input_bis)
 );
 
-assign exp_n_dat_o = new_clk;
+assign exp_n_dat_o[2] = new_clk;
 assign exp_p_dat_o = edge_input_bis;
 
 
