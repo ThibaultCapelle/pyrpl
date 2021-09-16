@@ -174,7 +174,7 @@ end
 //-----------------------------
 // cascaded set of FILTERSTAGES low- or high-pass filters
 wire signed [14-1:0] dat_i_filtered;
-red_pitaya_filter_block #(
+/*red_pitaya_filter_block #(
      .STAGES(FILTERSTAGES),
      .SHIFTBITS(FILTERSHIFTBITS),
      .SIGNALBITS(14),
@@ -187,7 +187,7 @@ red_pitaya_filter_block #(
   .set_filter(set_filter),
   .dat_i(dat_i),
   .dat_o(dat_i_filtered)
-  );
+  );*/
 
 //---------------------------------------------------------------------------------
 //  Set point error calculation - 1 cycle delay
