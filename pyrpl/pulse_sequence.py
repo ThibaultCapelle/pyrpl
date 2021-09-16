@@ -75,6 +75,14 @@ class Client(Generic_Client):
     @trigger_delay.setter
     def trigger_delay(self, val):
         self.send(self.parse('set_trigger_delay()', delay=val))
+        
+    @property
+    def TTL_frequency(self):
+        return self.ask(self.parse('get_TTL_frequency()'))
+    
+    @TTL_frequency.setter
+    def TTL_frequency(self, val):
+        self.send(self.parse('set_TTL_frequency()', freq=val))
     
     def trigger(self):
         self.send(self.parse('trigger()'))
@@ -146,6 +154,13 @@ class Driver:
     
     def get_trigger_delay(self):
         return self.write_reg(0x40200000, 0x240)/125e6
+    
+    def set_TTL_frequency(self, freq=None):
+        FPGA_val=int(125e6/4/freq)
+        self.write_reg(0x40200000, 0x248, val=FPGA_val)
+    
+    def get_TTL_frequency(self):
+        return 125e6/4/self.write_reg(0x40200000, 0x248)
     
     def set_frequency(self, val=None):
         FPGA_val=int(val/125e6*(2**32))
