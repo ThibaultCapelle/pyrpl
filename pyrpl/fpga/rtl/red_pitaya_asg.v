@@ -74,6 +74,7 @@ module red_pitaya_asg #(
   output     [ 14-1: 0] dac_a_o   ,  // DAC data CHA
   output     [ 14-1: 0] dac_b_o   ,  // DAC data CHB
   input                 dac_clk_i ,  // DAC clock
+  input                 dac_clk_i_2x,
   input                 dac_rstn_i,  // DAC reset - active low
   input                 trig_a_i  ,  // starting trigger CHA
   input                 trig_b_i  ,  // starting trigger CHB
@@ -88,6 +89,7 @@ module red_pitaya_asg #(
   input      [DWE-1:0] exp_p_dat_i,  // exp. con. input data
   output [DWE-1:0] exp_p_dat_o,  // exp. con. output data
   output [DWE-1:0] exp_p_dir_o,  // exp. con. 1-output enable
+  input output_clk,
   // System bus
   input      [ 32-1: 0] sys_addr  ,  // bus address
   input      [ 32-1: 0] sys_wdata ,  // bus write data
@@ -212,12 +214,12 @@ wire [31:0] count_reg;
 wire new_clk;
 
 
-assign exp_n_dir_o = 8'b100;
+assign exp_n_dir_o = 8'b101;
 assign exp_p_dir_o = 8'b1;
 
 derived_clock TTL(
     .N(frequency_divide),
-    .clk(dac_clk_i),
+    .clk(dac_clk_i_2x),
     .rst_n(dac_rstn_i),
     .output_clk(new_clk)
 );
@@ -243,6 +245,7 @@ edge_detect_holdoff e1(
 );
 
 assign exp_n_dat_o[2] = new_clk;
+assign exp_n_dat_o[0] = output_clk;
 assign exp_p_dat_o = edge_input_bis;
 
 

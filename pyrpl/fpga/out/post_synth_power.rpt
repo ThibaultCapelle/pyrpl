@@ -1,7 +1,7 @@
 Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2015.4 (lin64) Build 1412921 Wed Nov 18 09:44:32 MST 2015
-| Date             : Thu Sep 16 13:21:00 2021
+| Date             : Fri Sep 24 19:04:25 2021
 | Host             : usera-computer running 64-bit Ubuntu 20.04.3 LTS
 | Command          : report_power -file out/post_synth_power.rpt
 | Design           : red_pitaya_top
@@ -30,12 +30,12 @@ Table of Contents
 ----------
 
 +--------------------------+-------+
-| Total On-Chip Power (W)  | 2.283 |
-| Dynamic (W)              | 2.132 |
-| Device Static (W)        | 0.151 |
+| Total On-Chip Power (W)  | 2.376 |
+| Dynamic (W)              | 2.222 |
+| Device Static (W)        | 0.154 |
 | Effective TJA (C/W)      | 11.5  |
-| Max Ambient (C)          | 58.7  |
-| Junction Temperature (C) | 51.3  |
+| Max Ambient (C)          | 57.6  |
+| Junction Temperature (C) | 52.4  |
 | Confidence Level         | Low   |
 | Setting File             | ---   |
 | Simulation Activity File | ---   |
@@ -49,25 +49,26 @@ Table of Contents
 +--------------------------+-----------+----------+-----------+-----------------+
 | On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
 +--------------------------+-----------+----------+-----------+-----------------+
-| Clocks                   |     0.070 |       15 |       --- |             --- |
-| Slice Logic              |     0.120 |    33295 |       --- |             --- |
-|   LUT as Logic           |     0.102 |    15212 |     17600 |           86.43 |
-|   CARRY4                 |     0.014 |     1310 |      4400 |           29.77 |
-|   Register               |     0.005 |    13215 |     35200 |           37.54 |
-|   F7/F8 Muxes            |    <0.001 |      396 |     17600 |            2.25 |
+| Clocks                   |     0.071 |       16 |       --- |             --- |
+| Slice Logic              |     0.121 |    33513 |       --- |             --- |
+|   LUT as Logic           |     0.102 |    15288 |     17600 |           86.86 |
+|   CARRY4                 |     0.014 |     1327 |      4400 |           30.16 |
+|   Register               |     0.005 |    13275 |     35200 |           37.71 |
+|   F7/F8 Muxes            |    <0.001 |      402 |     17600 |            2.28 |
 |   LUT as Shift Register  |    <0.001 |       72 |      6000 |            1.20 |
-|   Others                 |     0.000 |      427 |       --- |             --- |
+|   Others                 |     0.000 |      436 |       --- |             --- |
 |   BUFG                   |     0.000 |        1 |        32 |            3.13 |
 |   LUT as Distributed RAM |     0.000 |       24 |      6000 |            0.40 |
-| Signals                  |     0.120 |    28648 |       --- |             --- |
+| Signals                  |     0.121 |    28771 |       --- |             --- |
 | Block RAM                |     0.103 |       34 |        60 |           56.67 |
+| MMCM                     |     0.086 |        1 |         2 |           50.00 |
 | PLL                      |     0.097 |        1 |         2 |           50.00 |
-| DSPs                     |     0.039 |       46 |        80 |           57.50 |
-| I/O                      |     0.286 |       95 |       100 |           95.00 |
+| DSPs                     |     0.040 |       47 |        80 |           58.75 |
+| I/O                      |     0.287 |       95 |       100 |           95.00 |
 | XADC                     |     0.004 |        1 |       --- |             --- |
 | PS7                      |     1.292 |        1 |       --- |             --- |
-| Static Power             |     0.151 |          |           |                 |
-| Total                    |     2.282 |          |           |                 |
+| Static Power             |     0.154 |          |           |                 |
+| Total                    |     2.375 |          |           |                 |
 +--------------------------+-----------+----------+-----------+-----------------+
 
 
@@ -77,9 +78,9 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
 +-----------+-------------+-----------+-------------+------------+
-| Vccint    |       1.000 |     0.461 |       0.451 |      0.011 |
-| Vccaux    |       1.800 |     0.069 |       0.057 |      0.012 |
-| Vcco33    |       3.300 |     0.082 |       0.081 |      0.001 |
+| Vccint    |       1.000 |     0.465 |       0.454 |      0.011 |
+| Vccaux    |       1.800 |     0.117 |       0.105 |      0.012 |
+| Vcco33    |       3.300 |     0.083 |       0.082 |      0.001 |
 | Vcco25    |       2.500 |     0.001 |       0.000 |      0.001 |
 | Vcco18    |       1.800 |     0.004 |       0.003 |      0.001 |
 | Vcco15    |       1.500 |     0.001 |       0.000 |      0.001 |
@@ -90,7 +91,7 @@ Table of Contents
 | MGTAVcc   |       1.000 |     0.000 |       0.000 |      0.000 |
 | MGTAVtt   |       1.200 |     0.000 |       0.000 |      0.000 |
 | MGTVccaux |       1.800 |     0.000 |       0.000 |      0.000 |
-| Vccpint   |       1.000 |     0.716 |       0.678 |      0.038 |
+| Vccpint   |       1.000 |     0.717 |       0.678 |      0.039 |
 | Vccpaux   |       1.800 |     0.038 |       0.027 |      0.010 |
 | Vccpll    |       1.800 |     0.017 |       0.014 |      0.003 |
 | Vcco_ddr  |       1.500 |     0.356 |       0.354 |      0.002 |
@@ -150,9 +151,10 @@ Table of Contents
 | pll_dac_clk_1x | pll/clk_dac_1x                                                        |             8.0 |
 | pll_dac_clk_2p | pll/clk_dac_2p                                                        |             4.0 |
 | pll_dac_clk_2x | pll/clk_dac_2x                                                        |             4.0 |
+| pll_ext__0     | pll_ext/clk_adc                                                       |            50.0 |
 | pll_pwm_clk    | pll/clk_pwm                                                           |             4.0 |
 | pll_ser_clk    | pll/clk_ser                                                           |             4.0 |
-| rx_clk         | daisy_p_i[1]                                                          |             4.0 |
+| rx_clk         | daisy_p_i[1]                                                          |           100.0 |
 +----------------+-----------------------------------------------------------------------+-----------------+
 
 
@@ -165,10 +167,11 @@ Table of Contents
 +----------------------------------------------------------------------------------+-----------+
 | Name                                                                             | Power (W) |
 +----------------------------------------------------------------------------------+-----------+
-| red_pitaya_top                                                                   |     2.131 |
+| red_pitaya_top                                                                   |     2.222 |
+|   derivation                                                                     |    <0.001 |
 |   i_ams                                                                          |     0.001 |
-|   i_asg                                                                          |     0.064 |
-|     TTL                                                                          |    <0.001 |
+|   i_asg                                                                          |     0.066 |
+|     TTL                                                                          |     0.003 |
 |     adv_trig_a                                                                   |     0.001 |
 |     adv_trig_b                                                                   |     0.001 |
 |     c1                                                                           |     0.004 |
@@ -177,7 +180,7 @@ Table of Contents
 |     e1                                                                           |    <0.001 |
 |     e3                                                                           |    <0.001 |
 |     prng                                                                         |     0.002 |
-|   i_dsp                                                                          |     0.285 |
+|   i_dsp                                                                          |     0.287 |
 |     dac_saturate[0]                                                              |    <0.001 |
 |     dac_saturate[1]                                                              |    <0.001 |
 |     genblk2[0].i_pid                                                             |     0.010 |
@@ -252,10 +255,11 @@ Table of Contents
 |         q0_product_and_sat                                                       |     0.002 |
 |         sumsaturation                                                            |    <0.001 |
 |       pfd_block                                                                  |    <0.001 |
+|     mult                                                                         |     0.002 |
 |   i_hk                                                                           |    <0.001 |
-|   i_iobufn[0]                                                                    |     0.000 |
+|   i_iobufn[0]                                                                    |    <0.001 |
 |   i_iobufn[1]                                                                    |     0.000 |
-|   i_iobufn[2]                                                                    |     0.000 |
+|   i_iobufn[2]                                                                    |     0.001 |
 |   i_iobufn[3]                                                                    |     0.000 |
 |   i_iobufn[4]                                                                    |     0.000 |
 |   i_iobufn[5]                                                                    |     0.000 |
@@ -366,6 +370,7 @@ Table of Contents
 |           inst                                                                   |     0.000 |
 |   i_scope                                                                        |     0.053 |
 |   pll                                                                            |     0.097 |
+|   pll_ext                                                                        |     0.086 |
 |   pwm[0]                                                                         |     0.002 |
 |   pwm[1]                                                                         |     0.002 |
 |   pwm[2]                                                                         |     0.002 |

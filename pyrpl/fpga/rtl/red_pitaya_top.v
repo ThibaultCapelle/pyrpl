@@ -325,6 +325,25 @@ red_pitaya_pll pll (
   .pll_locked  (pll_locked)
 );
 
+wire pll_ext;
+wire ext_clk;
+wire output_clk;
+red_pitaya_pll_ext pll_ext (
+  // inputs
+  .clk         (daisy_p_i[1]),  // clock
+  .rstn        (frstn[0]  ),  // reset - active low
+  // output clocks
+  .clk_adc     (pll_ext   )  // ADC clock
+);
+BUFG bufg_ext_clk    (.O (ext_clk   ), .I (pll_ext   ));
+
+derived_clock derivation (
+    .N(32'd100),
+    .clk(ext_clk),
+    .rst_n(adc_rstn),
+    .output_clk(output_clk)
+);
+
 BUFG bufg_adc_clk    (.O (adc_clk   ), .I (pll_adc_clk   ));
 BUFG bufg_dac_clk_1x (.O (dac_clk_1x), .I (pll_dac_clk_1x));
 BUFG bufg_dac_clk_2x (.O (dac_clk_2x), .I (pll_dac_clk_2x));
@@ -483,6 +502,7 @@ red_pitaya_asg i_asg (
   .dac_a_o         (  asg_a                      ),  // CH 1
   .dac_b_o         (  asg_b                      ),  // CH 2
   .dac_clk_i       (  adc_clk                    ),  // clock
+  .dac_clk_i_2x    (  dac_clk_2x                 ),
   .dac_rstn_i      (  adc_rstn                   ),  // reset - active low
   .trig_a_i        (  exp_p_in[0]                ),
   .trig_b_i        (  exp_p_in[0]                ),
@@ -495,6 +515,7 @@ red_pitaya_asg i_asg (
   .exp_p_dat_i     (  exp_p_in                   ),  // input data
   .exp_p_dat_o     (  exp_p_out                  ),  // output data
   .exp_p_dir_o     (  exp_p_dir                  ),  // 1-output enable
+  .output_clk(output_clk),
   // System bus
   .sys_addr        (  sys_addr                   ),  // address
   .sys_wdata       (  sys_wdata                  ),  // write data
