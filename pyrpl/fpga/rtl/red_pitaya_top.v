@@ -627,7 +627,7 @@ red_pitaya_pwm pwm [4-1:0] (
 //  Daisy chain
 //  simple communication module
 
-assign daisy_p_o = 1'bz;
-assign daisy_n_o = 1'bz;
+assign daisy_p_o[1] = adc_clk;
+//assign daisy_n_o = 1'bz;
 
 endmodule

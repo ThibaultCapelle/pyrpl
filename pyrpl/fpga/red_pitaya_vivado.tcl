@@ -64,6 +64,7 @@ read_verilog                      $path_rtl/axi_wr_fifo.v
 
 read_verilog                      $path_rtl/red_pitaya_ams.v
 read_verilog                      $path_rtl/red_pitaya_asg_ch.v
+read_verilog                      $path_rtl/derived_clock.v
 read_verilog                      $path_rtl/red_pitaya_asg.v
 read_verilog                      $path_rtl/red_pitaya_dfilt1.v
 read_verilog                      $path_rtl/red_pitaya_hk.v
@@ -100,7 +101,7 @@ read_verilog                      $path_rtl/multiplicator.v
 read_verilog                      $path_rtl/pulse.v
 read_verilog                      $path_rtl/edge_detect_holdoff.v
 read_verilog                      $path_rtl/edge_neg_detect_holdoff.v
-read_verilog                      $path_rtl/derived_clock.v
+
 
 
 #constraints
