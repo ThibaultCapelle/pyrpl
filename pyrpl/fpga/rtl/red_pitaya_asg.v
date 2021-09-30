@@ -89,7 +89,7 @@ module red_pitaya_asg #(
   input      [DWE-1:0] exp_p_dat_i,  // exp. con. input data
   output [DWE-1:0] exp_p_dat_o,  // exp. con. output data
   output [DWE-1:0] exp_p_dir_o,  // exp. con. 1-output enable
-  input output_clk,
+  input ext_clk,
   // System bus
   input      [ 32-1: 0] sys_addr  ,  // bus address
   input      [ 32-1: 0] sys_wdata ,  // bus write data
@@ -165,6 +165,7 @@ red_pitaya_adv_trigger adv_trig_b (
 
 reg [32-1:0] trigger_delay;
 reg [32-1:0] frequency_divide;
+reg [32-1:0] frequency_divide_ext_clk;
 
 
 red_pitaya_asg_ch  #(.RSZ (RSZ)) ch [1:0] (
@@ -212,7 +213,7 @@ wire counting;
 wire out;
 wire [31:0] count_reg;
 wire new_clk;
-
+wire output_clk;
 
 assign exp_n_dir_o = 8'b101;
 assign exp_p_dir_o = 8'b1;
@@ -223,7 +224,13 @@ derived_clock TTL(
     .rst_n(dac_rstn_i),
     .output_clk(new_clk)
 );
-    
+
+derived_clock #(.DIVIDE(1)) derivation (
+    .N(frequency_divide_ext_clk),
+    .clk(ext_clk),
+    .rst_n(dac_rstn_i),
+    .output_clk(output_clk)
+);
 
 edge_detect_holdoff e3(
     .clock(dac_clk_i),
@@ -244,7 +251,7 @@ edge_detect_holdoff e1(
     .detector_out(edge_input_bis)
 );
 
-assign exp_n_dat_o[2] = new_clk;
+assign exp_n_dat_o[2] = output_clk;
 assign exp_n_dat_o[0] = output_clk;
 assign exp_p_dat_o = edge_input_bis;
 
@@ -331,6 +338,7 @@ if (dac_rstn_i == 1'b0) begin
    
    trigger_delay <= 32'hf;
    frequency_divide <= 32'd100;
+   frequency_divide_ext_clk <= 32'd100;
 end else begin
    trig_a_sw  <= sys_wen && (sys_addr[19:0]==20'h0) && sys_wdata[0]  ;
    if (sys_wen && (sys_addr[19:0]==20'h0))
@@ -368,6 +376,7 @@ end else begin
       if (sys_addr[19:0]==20'h13C)  at_counts_b[64-1:32] <= sys_wdata[32-1: 0] ;
       if (sys_addr[19:0]==20'h240)  trigger_delay <= sys_wdata[32-1: 0] ;
       if (sys_addr[19:0]==20'h248)  frequency_divide <= sys_wdata[32-1: 0] ;
+      if (sys_addr[19:0]==20'h24C)  frequency_divide_ext_clk <= sys_wdata[32-1: 0] ;
 
    end
 
@@ -423,6 +432,7 @@ end else begin
      20'h0013C : begin sys_ack <= sys_en;          sys_rdata <= at_counts_b[64-1:32]     ; end
      20'h00240 : begin sys_ack <= sys_en;          sys_rdata <= trigger_delay     ; end
      20'h00248 : begin sys_ack <= sys_en;          sys_rdata <= frequency_divide     ; end
+     20'h0024C : begin sys_ack <= sys_en;          sys_rdata <= frequency_divide_ext_clk     ; end
 
 	 20'h1zzzz : begin sys_ack <= ack_dly;         sys_rdata <= {{32-14{1'b0}},buf_a_rdata}        ; end
      20'h2zzzz : begin sys_ack <= ack_dly;         sys_rdata <= {{32-14{1'b0}},buf_b_rdata}        ; end

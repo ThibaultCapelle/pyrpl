@@ -24,9 +24,9 @@ MMCME2_ADV #(
    .BANDWIDTH            ("OPTIMIZED"),
    .COMPENSATION         ("ZHOLD"    ),
    .DIVCLK_DIVIDE        ( 1         ),
-   .CLKFBOUT_MULT_F      ( 64        ),
+   .CLKFBOUT_MULT_F      ( 62.5      ),
    .CLKFBOUT_PHASE       ( 0.000     ),
-   .CLKOUT0_DIVIDE_F     ( 32        ),
+   .CLKOUT0_DIVIDE_F     ( 5         ),
    .CLKOUT0_PHASE        ( 0.000     ),
    .CLKOUT0_DUTY_CYCLE   ( 0.5       ),
    .CLKIN1_PERIOD        ( 100.000   ),
@@ -34,6 +34,7 @@ MMCME2_ADV #(
 ) pll_ext (
    // Output clocks
    .CLKFBOUT     (clk_fb    ),
+   .CLKFBIN      (clk_fb    ),
    .CLKOUT0      (clk_adc   ),
    .CLKIN1       (clk       ),
    .CLKIN2       (1'b0      ),
