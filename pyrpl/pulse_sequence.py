@@ -156,11 +156,11 @@ class Driver:
         return self.write_reg(0x40200000, 0x240)/125e6
     
     def set_TTL_frequency(self, freq=None):
-        FPGA_val=int(125e6/4/freq)
+        FPGA_val=int(125e6/9/freq)
         self.write_reg(0x40200000, 0x248, val=FPGA_val)
     
     def get_TTL_frequency(self):
-        return 125e6/4/self.write_reg(0x40200000, 0x248)
+        return 125e6/9/self.write_reg(0x40200000, 0x248)
     
     def set_frequency(self, val=None):
         FPGA_val=int(val/125e6*(2**32))
