@@ -67,6 +67,7 @@ reg            dna_shift;
 reg  [ 9-1: 0] dna_cnt  ;
 reg  [57-1: 0] dna_value;
 reg            dna_done ;
+reg 		   test;
 
 always @(posedge clk_i)
 if (rstn_i == 1'b0) begin
@@ -76,6 +77,7 @@ if (rstn_i == 1'b0) begin
   dna_cnt   <=  9'd0;
   dna_value <= 57'd0;
   dna_done  <=  1'b0;
+  test		<=  1'b0;
 end else begin
   if (!dna_done)
     dna_cnt <= dna_cnt + 1'd1;
@@ -83,6 +85,7 @@ end else begin
   dna_clk <= dna_cnt[2] ;
   dna_read  <= (dna_cnt < 9'd10);
   dna_shift <= (dna_cnt > 9'd18);
+  test		<= i_xadc/eoc_out;
 
   if ((dna_cnt[2:0]==3'h0) && !dna_done)
     dna_value <= {dna_value[57-2:0], dna_dout};
