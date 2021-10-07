@@ -1,0 +1,400 @@
+/*
+
+Vivado v2015.4 (64-bit)
+SW Build 1412921 on Wed Nov 18 09:44:32 MST 2015
+Process ID: 818742
+
+Current time: 	10/1/21 5:15:19 PM CEST
+Time zone: 	Central European Time (Europe/Copenhagen)
+
+OS: NAME="Ubuntu"
+Version: 5.11.0-27-generic
+Architecture: amd64
+Available processors (cores): 12
+
+DISPLAY: :11.0
+Screen size: 1364x768
+Screen resolution (DPI): 95
+Available screens: 1
+Default font: family=Dialog,name=Dialog,style=plain,size=12
+
+Java version: 	1.8.0_45 64-bit
+Java home: 	/opt/Xilinx/Vivado/2015.4/tps/lnx64/jre
+
+User name: 	usera
+User home directory: /home/usera
+User working directory: /home/usera/Documents/pyrpl/pyrpl/fpga
+User country: 	US
+User language: 	en
+User locale: 	en_US
+
+Vivado preferences path: /home/usera/.Xilinx/Vivado/2015.4/vivado.ini
+Vivado layouts directory: /home/usera/.Xilinx/Vivado/2015.4/layouts
+
+GUI allocated memory:	203 MB
+GUI max memory:		3,052 MB
+Engine allocated memory: 809 MB
+
+*/
+
+// TclEventType: START_GUI
+// Tcl Message: start_gui 
+// [GUI Memory]: 25 MB (+23920kb) [00:00:04]
+// [Engine Memory]: 809 MB (+696384kb) [00:00:04]
+// HMemoryUtils.trashcanNow. Engine heap size: 814 MB. GUI used memory: 21 MB. Current time: 10/1/21 5:15:21 PM CEST
+setText(RDIResource.CommandsInput_TYPE_TCL_COMMAND_HERE, "source red_pitaya_vivado_project.tcl", true); // ap:ao (R:ak, cq:JFrame)
+// Tcl Command: 'source red_pitaya_vivado_project.tcl'
+// bF:g (cq:JFrame):  Tcl Command Line : addNotify
+// TclEventType: DEBUG_PROBE_SET_CHANGE
+// TclEventType: FILE_SET_NEW
+// TclEventType: RUN_ADD
+// TclEventType: RUN_CURRENT
+// TclEventType: PROJECT_NEW
+// [GUI Memory]: 43 MB (+17273kb) [00:00:29]
+// [Engine Memory]: 890 MB (+42802kb) [00:00:30]
+// [GUI Memory]: 52 MB (+7375kb) [00:00:30]
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// Tcl Message: source red_pitaya_vivado_project.tcl 
+// Tcl Message: # set path_rtl rtl # set path_ip  ip # set path_sdc sdc # set part xc7z010clg400-1 # create_project -part $part -force pyrpl ./project 
+// Tcl Message: INFO: [IP_Flow 19-234] Refreshing IP repositories INFO: [IP_Flow 19-1704] No user IP repositories specified INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/opt/Xilinx/Vivado/2015.4/data/ip'. 
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// TclEventType: LOAD_FEATURE
+// TclEventType: RSB_SAVE_DIAGRAM
+// TclEventType: RSB_LOCK_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_LOCK_CHANGE
+// TclEventType: RSB_OPEN_DIAGRAM
+// [Engine Memory]: 939 MB (+5044kb) [00:00:32]
+// HMemoryUtils.trashcanNow. Engine heap size: 945 MB. GUI used memory: 28 MB. Current time: 10/1/21 5:15:47 PM CEST
+// Tcl Message: INFO: Currently there is no design <system> in project, so creating one... 
+// Tcl Message: Wrote  : </home/usera/Documents/pyrpl/pyrpl/fpga/project/pyrpl.srcs/sources_1/bd/system/system.bd>  
+// TclEventType: RSB_ADD_OBJECT
+// TclEventType: LOAD_FEATURE
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: RSB_ADD_OBJECT
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: RSB_ADD_OBJECT
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: RSB_ADD_OBJECT
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: RSB_ADD_OBJECT
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: RSB_ADD_OBJECT
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: INFO: Making design <system> as current_bd_design. 
+// Tcl Message: ## puts "INFO: Currently the variable <design_name> is equal to \"$design_name\"." 
+// Tcl Message: INFO: Currently the variable <design_name> is equal to "system". 
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: RSB_ADD_OBJECT
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: RSB_ADD_OBJECT
+// TclEventType: RSB_PROPERTY_CHANGE
+// [Engine Memory]: 1,001 MB (+15085kb) [00:00:33]
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: RSB_ADD_OBJECT
+// TclEventType: RSB_PROPERTY_CHANGE
+// Tcl Message: INFO: [Device 21-403] Loading part xc7z010clg400-1 
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: RSB_ADD_OBJECT
+// [GUI Memory]: 55 MB (+563kb) [00:00:36]
+// [Engine Memory]: 1,096 MB (+48056kb) [00:00:36]
+// [GUI Memory]: 61 MB (+2956kb) [00:00:36]
+// TclEventType: RSB_PROPERTY_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: REPORT_IP_STATUS_STALE
+// TclEventType: RSB_ADD_OBJECT
+// TclEventType: RSB_CONNECTION_CHANGE
+// TclEventType: RSB_ADD_OBJECT
+// TclEventType: RSB_LAYOUT_STATE
+// TclEventType: RSB_REGENERATE_LAYOUT
+// TclEventType: RSB_SAVE_DIAGRAM
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_SAVE_DIAGRAM
+// TclEventType: RSB_SCRIPT_TASK
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_SCRIPT_TASK
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: Wrote  : </home/usera/Documents/pyrpl/pyrpl/fpga/project/pyrpl.srcs/sources_1/bd/system/system.bd>  
+// Tcl Message: # generate_target all [get_files    system.bd] 
+// Tcl Message: Verilog Output written to : /home/usera/Documents/pyrpl/pyrpl/fpga/project/pyrpl.srcs/sources_1/bd/system/hdl/system.v Verilog Output written to : /home/usera/Documents/pyrpl/pyrpl/fpga/project/pyrpl.srcs/sources_1/bd/system/hdl/system_wrapper.v Wrote  : </home/usera/Documents/pyrpl/pyrpl/fpga/project/pyrpl.srcs/sources_1/bd/system/system.bd>  
+// [Engine Memory]: 1,173 MB (+22311kb) [00:00:39]
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: INFO: [IP_Flow 19-1686] Generating 'Simulation' target for IP 'system_processing_system7_0'... 
+// Tcl Message: INFO: [IP_Flow 19-1686] Generating 'Miscellaneous' target for IP 'system_processing_system7_0'... INFO: [IP_Flow 19-1686] Generating 'Change Log' target for IP 'system_processing_system7_0'... INFO: [BD 41-1029] Generation completed for the IP Integrator block processing_system7 . INFO: [IP_Flow 19-1686] Generating 'Instantiation Template' target for IP 'system_xadc_0'... INFO: [IP_Flow 19-1686] Generating 'Synthesis' target for IP 'system_xadc_0'... 
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_UPDATE_GRAPH
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_UPDATE_GRAPH
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_GRAPH_STALE
+// Tcl Message: Exporting to file /home/usera/Documents/pyrpl/pyrpl/fpga/project/pyrpl.srcs/sources_1/bd/system/hw_handoff/system.hwh Generated Block Design Tcl file /home/usera/Documents/pyrpl/pyrpl/fpga/project/pyrpl.srcs/sources_1/bd/system/hw_handoff/system_bd.tcl Generated Hardware Definition File /home/usera/Documents/pyrpl/pyrpl/fpga/project/pyrpl.srcs/sources_1/bd/system/hdl/system.hwdef 
+// Tcl Message: generate_target: Time (s): cpu = 00:00:09 ; elapsed = 00:00:09 . Memory (MB): peak = 6062.062 ; gain = 26.246 ; free physical = 15851 ; free virtual = 28611 
+// Tcl Message: INFO: [filemgmt 20-348] Importing the appropriate files for fileset: 'constrs_1' INFO: [filemgmt 20-348] Importing the appropriate files for fileset: 'sources_1' 
+// Tcl Message: # update_compile_order -fileset sources_1 
+// Elapsed time: 16 seconds
+dismissDialog("Tcl Command Line"); // bF:g (cq:JFrame)
+// TclEventType: DG_UPDATE_GRAPH
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_UPDATE_GRAPH
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_UPDATE_GRAPH
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_UPDATE_GRAPH
+// TclEventType: FILE_SET_CHANGE
+// [GUI Memory]: 66 MB (+1949kb) [00:00:46]
+// TclEventType: DG_GRAPH_STALE
+// Tcl Message: update_compile_order -fileset sources_1 
+// Tcl Message: update_compile_order -fileset sim_1 
+// TclEventType: DG_UPDATE_GRAPH
+// Elapsed time: 43 seconds
+setText(RDIResource.CommandsInput_TYPE_TCL_COMMAND_HERE, (String) null); // ap:ao (R:ak, cq:JFrame)
+// [GUI Memory]: 69 MB (+114kb) [00:22:51]
+// HMemoryUtils.trashcanNow. Engine heap size: 1,189 MB. GUI used memory: 34 MB. Current time: 10/1/21 5:45:52 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,189 MB. GUI used memory: 33 MB. Current time: 10/1/21 6:15:52 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,189 MB. GUI used memory: 33 MB. Current time: 10/1/21 6:45:52 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,189 MB. GUI used memory: 32 MB. Current time: 10/1/21 7:15:52 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,189 MB. GUI used memory: 32 MB. Current time: 10/1/21 7:45:52 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,189 MB. GUI used memory: 32 MB. Current time: 10/1/21 8:15:52 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,189 MB. GUI used memory: 32 MB. Current time: 10/1/21 8:45:52 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,189 MB. GUI used memory: 32 MB. Current time: 10/1/21 9:15:52 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/1/21 9:45:52 PM CEST
+// [GUI Memory]: 73 MB (+67kb) [04:52:47]
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/1/21 10:15:53 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/1/21 10:45:53 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/1/21 11:15:53 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/1/21 11:45:53 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/2/21 12:15:53 AM CEST
+// [GUI Memory]: 77 MB (+79kb) [07:23:25]
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/2/21 12:45:53 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/2/21 1:15:53 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/2/21 1:45:54 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/2/21 2:15:54 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/2/21 2:45:54 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/2/21 3:15:54 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/2/21 3:45:54 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/2/21 4:15:54 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/2/21 4:45:54 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/2/21 5:15:55 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/2/21 5:45:55 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/2/21 6:15:55 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/2/21 6:45:55 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/2/21 7:15:55 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/2/21 7:45:55 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/2/21 8:15:55 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/2/21 8:45:55 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/2/21 9:15:56 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/2/21 9:45:56 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/2/21 10:15:56 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/2/21 10:45:56 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/2/21 11:15:56 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/2/21 11:45:56 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/2/21 12:15:56 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/2/21 12:45:57 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/2/21 1:15:57 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/2/21 1:45:57 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/2/21 2:15:57 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/2/21 2:45:57 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/2/21 3:15:57 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/2/21 3:45:57 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/2/21 4:15:57 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/2/21 4:45:58 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/2/21 5:15:58 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/2/21 5:45:58 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/2/21 6:15:58 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/2/21 6:45:58 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/2/21 7:15:58 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/2/21 7:45:58 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/2/21 8:15:59 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/2/21 8:45:59 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/2/21 9:15:59 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/2/21 9:45:59 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/2/21 10:15:59 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/2/21 10:45:59 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/2/21 11:15:59 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/2/21 11:46:00 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/3/21 12:16:00 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/3/21 12:46:00 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/3/21 1:16:00 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/3/21 1:46:00 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/3/21 2:16:00 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/3/21 2:46:00 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/3/21 3:16:00 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/3/21 3:46:01 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/3/21 4:16:01 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/3/21 4:46:01 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/3/21 5:16:01 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/3/21 5:46:01 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/3/21 6:16:01 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/3/21 6:46:01 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/3/21 7:16:02 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/3/21 7:46:02 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/3/21 8:16:02 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/3/21 8:46:02 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/3/21 9:16:02 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/3/21 9:46:02 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/3/21 10:16:02 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/3/21 10:46:02 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/3/21 11:16:03 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/3/21 11:46:03 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/3/21 12:16:03 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/3/21 12:46:03 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/3/21 1:16:03 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/3/21 1:46:03 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/3/21 2:16:03 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/3/21 2:46:04 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/3/21 3:16:04 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/3/21 3:46:04 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/3/21 4:16:04 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/3/21 4:46:04 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/3/21 5:16:04 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/3/21 5:46:04 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/3/21 6:16:04 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/3/21 6:46:05 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/3/21 7:16:05 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/3/21 7:46:05 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/3/21 8:16:05 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/3/21 8:46:05 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/3/21 9:16:05 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/3/21 9:46:05 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/3/21 10:16:06 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/3/21 10:46:06 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/3/21 11:16:06 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/3/21 11:46:06 PM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/4/21 12:16:06 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/4/21 12:46:06 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/4/21 1:16:06 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/4/21 1:46:06 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/4/21 2:16:07 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/4/21 2:46:07 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/4/21 3:16:07 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/4/21 3:46:07 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/4/21 4:16:07 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/4/21 4:46:07 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/4/21 5:16:07 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/4/21 5:46:08 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/4/21 6:16:08 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/4/21 6:46:08 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/4/21 7:16:08 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/4/21 7:46:08 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/4/21 8:16:08 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,190 MB. GUI used memory: 32 MB. Current time: 10/4/21 8:46:08 AM CEST
+// Run Command: RDIResourceCommand.RDICommands_DELETE
+// TclEventType: RSB_SCRIPT_TASK
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_REMOVE_OBJECT
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_REMOVE_OBJECT
+// TclEventType: RSB_SCRIPT_TASK
+// Tcl Message: delete_bd_objs [get_bd_nets proc_sys_reset_0_peripheral_aresetn] [get_bd_nets xadc_wiz_0_ip2intc_irpt] [get_bd_intf_nets axi_protocol_converter_0_M_AXI] [get_bd_intf_nets Vp_Vn_1] [get_bd_intf_nets Vaux0_1] [get_bd_intf_nets Vaux1_1] [get_bd_intf_nets Vaux8_1] [get_bd_intf_nets Vaux9_1] [get_bd_cells xadc] 
+// TclEventType: DG_UPDATE_GRAPH
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_UPDATE_GRAPH
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_UPDATE_GRAPH
+// HMemoryUtils.trashcanNow. Engine heap size: 1,202 MB. GUI used memory: 33 MB. Current time: 10/4/21 8:49:38 AM CEST
+// Run Command: PAResourceCommand.PACommandNames_SAVE_RSB_DESIGN
+// TclEventType: RSB_SAVE_DIAGRAM
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_SAVE_DIAGRAM
+// Tcl Message: save_bd_design 
+// Tcl Message: Wrote  : </home/usera/Documents/pyrpl/pyrpl/fpga/project/pyrpl.srcs/sources_1/bd/system/system.bd>  
+// TclEventType: DG_UPDATE_GRAPH
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_UPDATE_GRAPH
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_UPDATE_GRAPH
+// Elapsed time: 228778 seconds
+selectMenu(PAResourceItoN.MainMenuMgr_FILE, "File"); // U:JideMenu (CommandMenuBar:CommandBar, cq:JFrame)
+selectMenu(PAResourceItoN.MainMenuMgr_OPEN_RECENT_PROJECT, "Open Recent Project"); // aa:JMenu (JPopupMenu:JComponent, cq:JFrame)
+// Elapsed time: 13 seconds
+dismissMenu(PAResourceItoN.MainMenuMgr_FILE, "File"); // U:JideMenu (CommandMenuBar:CommandBar, cq:JFrame)
+selectButton(PAResourceCommand.PACommandNames_RUN_IMPLEMENTATION, "run_implementation"); // y:JideButton (CommandBar:DockableBar, cq:JFrame)
+// Run Command: PAResourceCommand.PACommandNames_RUN_IMPLEMENTATION
+// bF:g (cq:JFrame):  Starting Design Runs : addNotify
+selectButton("PAResourceQtoS.RunImplementation_THERE_NO_NETLIST_AVAILABLE_OK_OK", "OK"); // JButton:AbstractButton (JPanel:JComponent, T:JDialog)
+// TclEventType: RSB_SCRIPT_TASK
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RSB_SCRIPT_TASK
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_UPDATE_GRAPH
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_UPDATE_GRAPH
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RUN_LAUNCH
+// TclEventType: DG_UPDATE_GRAPH
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_UPDATE_GRAPH
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_UPDATE_GRAPH
+// TclEventType: RUN_LAUNCH
+// TclEventType: RUN_MODIFY
+// Tcl Message: launch_runs impl_1 
+// Tcl Message: Verilog Output written to : /home/usera/Documents/pyrpl/pyrpl/fpga/project/pyrpl.srcs/sources_1/bd/system/hdl/system.v Verilog Output written to : /home/usera/Documents/pyrpl/pyrpl/fpga/project/pyrpl.srcs/sources_1/bd/system/hdl/system_wrapper.v Wrote  : </home/usera/Documents/pyrpl/pyrpl/fpga/project/pyrpl.srcs/sources_1/bd/system/system.bd>  
+// Tcl Message: INFO: [BD 41-1029] Generation completed for the IP Integrator block axi_protocol_converter_0 . INFO: [BD 41-1029] Generation completed for the IP Integrator block proc_sys_reset . INFO: [BD 41-1029] Generation completed for the IP Integrator block processing_system7 . INFO: [BD 41-1029] Generation completed for the IP Integrator block xlconstant . 
+// Tcl Message: Exporting to file /home/usera/Documents/pyrpl/pyrpl/fpga/project/pyrpl.srcs/sources_1/bd/system/hw_handoff/system.hwh Generated Block Design Tcl file /home/usera/Documents/pyrpl/pyrpl/fpga/project/pyrpl.srcs/sources_1/bd/system/hw_handoff/system_bd.tcl Generated Hardware Definition File /home/usera/Documents/pyrpl/pyrpl/fpga/project/pyrpl.srcs/sources_1/bd/system/hdl/system.hwdef [Mon Oct  4 08:50:04 2021] Launched synth_1... Run output will be captured here: /home/usera/Documents/pyrpl/pyrpl/fpga/project/pyrpl.runs/synth_1/runme.log [Mon Oct  4 08:50:05 2021] Launched impl_1... Run output will be captured here: /home/usera/Documents/pyrpl/pyrpl/fpga/project/pyrpl.runs/impl_1/runme.log 
+// 'c' command handler elapsed time: 5 seconds
+dismissDialog("Starting Design Runs"); // bF:g (cq:JFrame)
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: RUN_FAILED
+// X:G (cq:JFrame): Synthesis Failed: addNotify
+// Elapsed time: 30 seconds
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a:JButton (JPanel:JComponent, X:G)
+// Run Command: PAResourceCommand.PACommandNames_MESSAGE_WINDOW
+dismissDialog("Synthesis Failed"); // X:G (cq:JFrame)
+// [GUI Memory]: 81 MB (+478kb) [63:41:33]
+// Elapsed time: 603 seconds
+typeControlKey(null, null, 'z');
+typeControlKey(null, null, 'z');
+typeControlKey(null, null, 'z');
+typeControlKey(null, null, 'z');
+typeControlKey(null, null, 'z');
+typeControlKey(null, null, 'z');
+typeControlKey(null, null, 'z');
+typeControlKey(null, null, 'z');
+typeControlKey(null, null, 'z');
+typeControlKey(null, null, 'z');
+typeControlKey(null, null, 'z');
+typeControlKey(null, null, 'z');
+typeControlKey(null, null, 'z');
+typeControlKey(null, null, 'z');
+// Elapsed time: 46 seconds
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Synthesis, [Common 17-69] Command failed: Synthesis failed - please see the console or run log file for details. ]", 3, false); // ag:k (JViewport:JComponent, cq:JFrame)
+// HMemoryUtils.trashcanNow. Engine heap size: 1,221 MB. GUI used memory: 35 MB. Current time: 10/4/21 9:19:39 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,222 MB. GUI used memory: 33 MB. Current time: 10/4/21 9:23:19 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,222 MB. GUI used memory: 34 MB. Current time: 10/4/21 9:53:19 AM CEST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,222 MB. GUI used memory: 34 MB. Current time: 10/4/21 10:23:19 AM CEST

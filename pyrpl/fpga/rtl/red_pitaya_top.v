@@ -566,6 +566,7 @@ red_pitaya_ams i_ams (
   .dac_d_o         (  pwm_cfg_d                  ),
   .pwm0_i 		   (  pwm_signals[0]             ),
   .pwm1_i 		   (  pwm_signals[1]             ),
+  .dsp_trig_i      (  dsp_trigger                ),
    // System bus
   .sys_addr        (  sys_addr                   ),  // address
   .sys_wdata       (  sys_wdata                  ),  // write data
@@ -574,7 +575,9 @@ red_pitaya_ams i_ams (
   .sys_ren         (  sys_ren[4]                 ),  // read enable
   .sys_rdata       (  sys_rdata[ 4*32+31: 4*32]  ),  // read data
   .sys_err         (  sys_err[4]                 ),  // error indicator
-  .sys_ack         (  sys_ack[4]                 )   // acknowledge signal
+  .sys_ack         (  sys_ack[4]                 ),   // acknowledge signal
+  .vinp_i        (vinp_i      ),  // voltages p
+  .vinn_i        (vinn_i      )  // voltages n
 );
 
 

@@ -85,7 +85,7 @@ end else begin
   dna_clk <= dna_cnt[2] ;
   dna_read  <= (dna_cnt < 9'd10);
   dna_shift <= (dna_cnt > 9'd18);
-  test		<= i_xadc/eoc_out;
+  //test		<= i_xadc/eoc_out;
 
   if ((dna_cnt[2:0]==3'h0) && !dna_done)
     dna_value <= {dna_value[57-2:0], dna_dout};

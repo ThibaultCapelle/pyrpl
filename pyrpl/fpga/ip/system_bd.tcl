@@ -1,6 +1,6 @@
 
 ################################################################
-# This is a generated script based on design: system
+# This is a generated script based on design: test
 #
 # Though there are limitations about the generated script,
 # the main purpose of this utility is to make learning
@@ -25,7 +25,7 @@ if { [string first $scripts_vivado_version $current_vivado_version] == -1 } {
 ################################################################
 
 # To test this script, run the following commands from Vivado Tcl console:
-# source system_script.tcl
+# source test_script.tcl
 
 # If you do not already have a project created,
 # you can create a project using the following command:
@@ -40,7 +40,7 @@ if { [get_projects -quiet] eq "" } {
 
 
 # CHANGE DESIGN NAME HERE
-set design_name system
+set design_name test
 
 # If you do not already have an existing IP Integrator design open,
 # you can create a design using the following command:
@@ -158,6 +158,7 @@ CONFIG.ADDR_WIDTH {32} \
 CONFIG.ARUSER_WIDTH {0} \
 CONFIG.AWUSER_WIDTH {0} \
 CONFIG.BUSER_WIDTH {0} \
+CONFIG.CLK_DOMAIN {} \
 CONFIG.DATA_WIDTH {64} \
 CONFIG.FREQ_HZ {125000000} \
 CONFIG.HAS_BRESP {1} \
@@ -186,6 +187,7 @@ CONFIG.ADDR_WIDTH {32} \
 CONFIG.ARUSER_WIDTH {0} \
 CONFIG.AWUSER_WIDTH {0} \
 CONFIG.BUSER_WIDTH {0} \
+CONFIG.CLK_DOMAIN {} \
 CONFIG.DATA_WIDTH {64} \
 CONFIG.FREQ_HZ {125000000} \
 CONFIG.HAS_BRESP {1} \
@@ -342,31 +344,10 @@ CONFIG.PCW_USE_S_AXI_HP0 {1} \
 CONFIG.PCW_USE_S_AXI_HP1 {1} \
  ] $processing_system7
 
-  # Create instance: xadc, and set properties
-  set xadc [ create_bd_cell -type ip -vlnv xilinx.com:ip:xadc_wiz:3.2 xadc ]
-  set_property -dict [ list \
-CONFIG.CHANNEL_ENABLE_VAUXP0_VAUXN0 {true} \
-CONFIG.CHANNEL_ENABLE_VAUXP1_VAUXN1 {true} \
-CONFIG.CHANNEL_ENABLE_VAUXP8_VAUXN8 {true} \
-CONFIG.CHANNEL_ENABLE_VAUXP9_VAUXN9 {true} \
-CONFIG.CHANNEL_ENABLE_VP_VN {true} \
-CONFIG.ENABLE_AXI4STREAM {false} \
-CONFIG.EXTERNAL_MUX_CHANNEL {VP_VN} \
-CONFIG.SEQUENCER_MODE {Off} \
-CONFIG.SINGLE_CHANNEL_SELECTION {TEMPERATURE} \
-CONFIG.XADC_STARUP_SELECTION {independent_adc} \
- ] $xadc
-
   # Create instance: xlconstant, and set properties
   set xlconstant [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant:1.1 xlconstant ]
 
   # Create interface connections
-  connect_bd_intf_net -intf_net Vaux0_1 [get_bd_intf_ports Vaux0] [get_bd_intf_pins xadc/Vaux0]
-  connect_bd_intf_net -intf_net Vaux1_1 [get_bd_intf_ports Vaux1] [get_bd_intf_pins xadc/Vaux1]
-  connect_bd_intf_net -intf_net Vaux8_1 [get_bd_intf_ports Vaux8] [get_bd_intf_pins xadc/Vaux8]
-  connect_bd_intf_net -intf_net Vaux9_1 [get_bd_intf_ports Vaux9] [get_bd_intf_pins xadc/Vaux9]
-  connect_bd_intf_net -intf_net Vp_Vn_1 [get_bd_intf_ports Vp_Vn] [get_bd_intf_pins xadc/Vp_Vn]
-  connect_bd_intf_net -intf_net axi_protocol_converter_0_M_AXI [get_bd_intf_pins axi_protocol_converter_0/M_AXI] [get_bd_intf_pins xadc/s_axi_lite]
   connect_bd_intf_net -intf_net processing_system7_0_M_AXI_GP0 [get_bd_intf_ports M_AXI_GP0] [get_bd_intf_pins processing_system7/M_AXI_GP0]
   connect_bd_intf_net -intf_net processing_system7_0_M_AXI_GP1 [get_bd_intf_pins axi_protocol_converter_0/S_AXI] [get_bd_intf_pins processing_system7/M_AXI_GP1]
   connect_bd_intf_net -intf_net processing_system7_0_ddr [get_bd_intf_ports DDR] [get_bd_intf_pins processing_system7/DDR]
@@ -377,86 +358,25 @@ CONFIG.XADC_STARUP_SELECTION {independent_adc} \
   # Create port connections
   connect_bd_net -net m_axi_gp0_aclk_1 [get_bd_ports M_AXI_GP0_ACLK] [get_bd_pins processing_system7/M_AXI_GP0_ACLK]
   connect_bd_net -net proc_sys_reset_0_interconnect_aresetn [get_bd_pins axi_protocol_converter_0/aresetn] [get_bd_pins proc_sys_reset/interconnect_aresetn]
-  connect_bd_net -net proc_sys_reset_0_peripheral_aresetn [get_bd_pins proc_sys_reset/peripheral_aresetn] [get_bd_pins xadc/s_axi_aresetn]
+  connect_bd_net -net proc_sys_reset_0_peripheral_aresetn [get_bd_pins proc_sys_reset/peripheral_aresetn]
   connect_bd_net -net processing_system7_0_fclk_clk0 [get_bd_ports FCLK_CLK0] [get_bd_pins processing_system7/FCLK_CLK0]
   connect_bd_net -net processing_system7_0_fclk_clk1 [get_bd_ports FCLK_CLK1] [get_bd_pins processing_system7/FCLK_CLK1]
   connect_bd_net -net processing_system7_0_fclk_clk2 [get_bd_ports FCLK_CLK2] [get_bd_pins processing_system7/FCLK_CLK2]
-  connect_bd_net -net processing_system7_0_fclk_clk3 [get_bd_ports FCLK_CLK3] [get_bd_pins axi_protocol_converter_0/aclk] [get_bd_pins proc_sys_reset/slowest_sync_clk] [get_bd_pins processing_system7/FCLK_CLK3] [get_bd_pins processing_system7/M_AXI_GP1_ACLK] [get_bd_pins xadc/s_axi_aclk]
+  connect_bd_net -net processing_system7_0_fclk_clk3 [get_bd_ports FCLK_CLK3] [get_bd_pins axi_protocol_converter_0/aclk] [get_bd_pins proc_sys_reset/slowest_sync_clk] [get_bd_pins processing_system7/FCLK_CLK3] [get_bd_pins processing_system7/M_AXI_GP1_ACLK]
   connect_bd_net -net processing_system7_0_fclk_reset0_n [get_bd_ports FCLK_RESET0_N] [get_bd_pins processing_system7/FCLK_RESET0_N]
   connect_bd_net -net processing_system7_0_fclk_reset1_n [get_bd_ports FCLK_RESET1_N] [get_bd_pins processing_system7/FCLK_RESET1_N]
   connect_bd_net -net processing_system7_0_fclk_reset2_n [get_bd_ports FCLK_RESET2_N] [get_bd_pins processing_system7/FCLK_RESET2_N]
   connect_bd_net -net processing_system7_0_fclk_reset3_n [get_bd_ports FCLK_RESET3_N] [get_bd_pins proc_sys_reset/ext_reset_in] [get_bd_pins processing_system7/FCLK_RESET3_N]
   connect_bd_net -net s_axi_hp0_aclk [get_bd_ports S_AXI_HP0_aclk] [get_bd_pins processing_system7/S_AXI_HP0_ACLK]
   connect_bd_net -net s_axi_hp1_aclk [get_bd_ports S_AXI_HP1_aclk] [get_bd_pins processing_system7/S_AXI_HP1_ACLK]
-  connect_bd_net -net xadc_wiz_0_ip2intc_irpt [get_bd_pins processing_system7/IRQ_F2P] [get_bd_pins xadc/ip2intc_irpt]
+  connect_bd_net -net xadc_wiz_0_ip2intc_irpt [get_bd_pins processing_system7/IRQ_F2P]
   connect_bd_net -net xlconstant_dout [get_bd_pins proc_sys_reset/aux_reset_in] [get_bd_pins xlconstant/dout]
 
   # Create address segments
   create_bd_addr_seg -range 0x40000000 -offset 0x40000000 [get_bd_addr_spaces processing_system7/Data] [get_bd_addr_segs M_AXI_GP0/Reg] SEG_system_Reg
-  create_bd_addr_seg -range 0x10000 -offset 0x83C00000 [get_bd_addr_spaces processing_system7/Data] [get_bd_addr_segs xadc/s_axi_lite/Reg] SEG_xadc_wiz_0_Reg
   create_bd_addr_seg -range 0x20000000 -offset 0x0 [get_bd_addr_spaces S_AXI_HP0] [get_bd_addr_segs processing_system7/S_AXI_HP0/HP0_DDR_LOWOCM] SEG_processing_system7_0_HP0_DDR_LOWOCM
   create_bd_addr_seg -range 0x20000000 -offset 0x0 [get_bd_addr_spaces S_AXI_HP1] [get_bd_addr_segs processing_system7/S_AXI_HP1/HP1_DDR_LOWOCM] SEG_processing_system7_0_HP1_DDR_LOWOCM
 
-  # Perform GUI Layout
-  regenerate_bd_layout -layout_string {
-   guistr: "# # String gsaved with Nlview 6.5.5  2015-06-26 bk=1.3371 VDI=38 GEI=35 GUI=JA:1.8
-#  -string -flagsOSRD
-preplace port FCLK_CLK3 -pg 1 -y 250 -defaultsOSRD
-preplace port S_AXI_HP1 -pg 1 -y 160 -defaultsOSRD
-preplace port DDR -pg 1 -y 30 -defaultsOSRD
-preplace port Vp_Vn -pg 1 -y 850 -defaultsOSRD
-preplace port Vaux0 -pg 1 -y 870 -defaultsOSRD
-preplace port M_AXI_GP0_ACLK -pg 1 -y 180 -defaultsOSRD
-preplace port FCLK_RESET0_N -pg 1 -y 270 -defaultsOSRD
-preplace port Vaux1 -pg 1 -y 890 -defaultsOSRD
-preplace port S_AXI_HP0_aclk -pg 1 -y 220 -defaultsOSRD
-preplace port M_AXI_GP0 -pg 1 -y 90 -defaultsOSRD
-preplace port FCLK_RESET1_N -pg 1 -y 290 -defaultsOSRD
-preplace port S_AXI_HP1_aclk -pg 1 -y 240 -defaultsOSRD
-preplace port FCLK_RESET3_N -pg 1 -y 330 -defaultsOSRD
-preplace port FIXED_IO -pg 1 -y 50 -defaultsOSRD
-preplace port FCLK_RESET2_N -pg 1 -y 310 -defaultsOSRD
-preplace port FCLK_CLK0 -pg 1 -y 190 -defaultsOSRD
-preplace port FCLK_CLK1 -pg 1 -y 210 -defaultsOSRD
-preplace port Vaux8 -pg 1 -y 910 -defaultsOSRD
-preplace port FCLK_CLK2 -pg 1 -y 230 -defaultsOSRD
-preplace port Vaux9 -pg 1 -y 930 -defaultsOSRD
-preplace port S_AXI_HP0 -pg 1 -y 140 -defaultsOSRD
-preplace inst xlconstant -pg 1 -lvl 1 -y 620 -defaultsOSRD
-preplace inst axi_protocol_converter_0 -pg 1 -lvl 2 -y 460 -defaultsOSRD
-preplace inst processing_system7 -pg 1 -lvl 2 -y 180 -defaultsOSRD
-preplace inst xadc -pg 1 -lvl 2 -y 900 -defaultsOSRD
-preplace inst proc_sys_reset -pg 1 -lvl 2 -y 620 -defaultsOSRD
-preplace netloc processing_system7_0_ddr 1 2 1 N
-preplace netloc Vaux0_1 1 0 2 NJ 870 N
-preplace netloc processing_system7_0_fclk_reset3_n 1 1 2 240 390 720
-preplace netloc s_axi_hp0_1 1 0 2 NJ 140 N
-preplace netloc processing_system7_0_fclk_reset2_n 1 2 1 N
-preplace netloc processing_system7_0_M_AXI_GP0 1 2 1 N
-preplace netloc xlconstant_dout 1 1 1 NJ
-preplace netloc processing_system7_0_fclk_reset1_n 1 2 1 N
-preplace netloc processing_system7_0_M_AXI_GP1 1 1 2 260 530 710
-preplace netloc Vp_Vn_1 1 0 2 NJ 850 N
-preplace netloc xadc_wiz_0_ip2intc_irpt 1 1 2 230 730 710
-preplace netloc s_axi_hp0_aclk 1 0 2 NJ 220 N
-preplace netloc s_axi_hp1_1 1 0 2 NJ 160 N
-preplace netloc proc_sys_reset_0_interconnect_aresetn 1 1 2 250 710 710
-preplace netloc axi_protocol_converter_0_M_AXI 1 1 2 260 720 730
-preplace netloc Vaux8_1 1 0 2 NJ 910 N
-preplace netloc s_axi_hp1_aclk 1 0 2 NJ 240 N
-preplace netloc processing_system7_0_fclk_reset0_n 1 2 1 N
-preplace netloc processing_system7_0_fixed_io 1 2 1 N
-preplace netloc Vaux9_1 1 0 2 NJ 930 N
-preplace netloc processing_system7_0_fclk_clk0 1 2 1 N
-preplace netloc proc_sys_reset_0_peripheral_aresetn 1 1 2 260 1070 720
-preplace netloc Vaux1_1 1 0 2 NJ 890 N
-preplace netloc processing_system7_0_fclk_clk1 1 2 1 N
-preplace netloc m_axi_gp0_aclk_1 1 0 2 NJ 180 N
-preplace netloc processing_system7_0_fclk_clk2 1 2 1 N
-preplace netloc processing_system7_0_fclk_clk3 1 1 2 220 380 730
-levelinfo -pg 1 -10 150 490 780 -top -20 -bot 1180
-",
-}
 
   # Restore current instance
   current_bd_instance $oldCurInst
@@ -472,4 +392,6 @@ levelinfo -pg 1 -10 150 490 780 -top -20 -bot 1180
 
 create_root_design ""
 
+
+puts "\n\nWARNING: This Tcl script was generated from a block design that has not been validated. It is possible that design <$design_name> may result in errors during validation."
 

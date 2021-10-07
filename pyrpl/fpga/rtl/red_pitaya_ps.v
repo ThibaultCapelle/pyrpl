@@ -350,7 +350,7 @@ BUFG i_fclk1_buf  (.O(fclk_clk_o[1]), .I(fclk_clk[1]));
 BUFG i_fclk2_buf  (.O(fclk_clk_o[2]), .I(fclk_clk[2]));
 BUFG i_fclk3_buf  (.O(fclk_clk_o[3]), .I(fclk_clk[3]));
 
-system_wrapper system_i (
+test_wrapper system_i (
   // MIO
   .FIXED_IO_mio      (FIXED_IO_mio     ),
   .FIXED_IO_ps_clk   (FIXED_IO_ps_clk  ),
@@ -384,11 +384,11 @@ system_wrapper system_i (
   .FCLK_RESET2_N     (fclk_rstn[2]     ),
   .FCLK_RESET3_N     (fclk_rstn[3]     ),
   // XADC
-  .Vaux0_v_n (vinn_i[1]),  .Vaux0_v_p (vinp_i[1]),
+  /*.Vaux0_v_n (vinn_i[1]),  .Vaux0_v_p (vinp_i[1]),
   .Vaux1_v_n (vinn_i[2]),  .Vaux1_v_p (vinp_i[2]),
   .Vaux8_v_n (vinn_i[0]),  .Vaux8_v_p (vinp_i[0]),
   .Vaux9_v_n (vinn_i[3]),  .Vaux9_v_p (vinp_i[3]),
-  .Vp_Vn_v_n (vinn_i[4]),  .Vp_Vn_v_p (vinp_i[4]),
+  .Vp_Vn_v_n (vinn_i[4]),  .Vp_Vn_v_p (vinp_i[4]),*/
   // GP0
   .M_AXI_GP0_ACLK    (axi0_clk_i),
   .M_AXI_GP0_arvalid (gp0_maxi_arvalid),  // out

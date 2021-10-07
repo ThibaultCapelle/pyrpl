@@ -40,10 +40,10 @@ create_project -in_memory -part $part
 
 # file was created from GUI using "write_bd_tcl -force ip/system_bd.tcl"
 # create PS BD
-source                            $path_ip/system_bd.tcl
+source                            $path_ip/test_bd.tcl
 
 # generate SDK files
-generate_target all [get_files    system.bd]
+generate_target all [get_files    test.bd]
 write_hwdef              -file    $path_sdk/red_pitaya.hwdef
 
 ################################################################################
@@ -55,8 +55,8 @@ write_hwdef              -file    $path_sdk/red_pitaya.hwdef
 
 # template
 #read_verilog                      $path_rtl/...
-
-read_verilog                      .srcs/sources_1/bd/system/hdl/system_wrapper.v
+read_verilog                      myproj/project_1.srcs/sources_1/bd/test/hdl/test.v
+read_verilog                      myproj/project_1.srcs/sources_1/bd/test/hdl/test_wrapper.v
 
 read_verilog                      $path_rtl/axi_master.v
 read_verilog                      $path_rtl/axi_slave.v
