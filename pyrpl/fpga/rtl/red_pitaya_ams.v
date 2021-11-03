@@ -102,11 +102,11 @@ if (rstn_i == 1'b0) begin
    dac_d_o     <= 24'h000000 ;
    trigger_source <= 16'h0100;  // by default, auto-triggering is enabled
 end else begin
-   //dac_a_o <= cfg;
-   //dac_b_o <= cfg_b;
+   dac_a_o <= cfg;
+   dac_b_o <= cfg_b;
    if (sys_wen) begin
-      if (sys_addr[19:0]==16'h20)   dac_a_o <= sys_wdata[24-1: 0] ;
-      if (sys_addr[19:0]==16'h24)   dac_b_o <= sys_wdata[24-1: 0] ;
+      //if (sys_addr[19:0]==16'h20)   dac_a_o <= sys_wdata[24-1: 0] ;
+      //if (sys_addr[19:0]==16'h24)   dac_b_o <= sys_wdata[24-1: 0] ;
       if (sys_addr[19:0]==16'h28)   dac_c_o <= sys_wdata[24-1: 0] ;
       if (sys_addr[19:0]==16'h2C)   dac_d_o <= sys_wdata[24-1: 0] ;
       if (sys_addr[19:0]==16'h50)   trigger_source <= sys_wdata[16-1: 0] ;
@@ -191,7 +191,7 @@ end
 // configuration bitwidth for pwm module
 localparam CCW = 24;
 
-/*
+
 reg [24-1:0] cfg;
 wire bit3;
 wire bit2;
@@ -216,7 +216,7 @@ if (rstn_i == 1'b0) begin
 end else begin
    cfg_b  <= {~pwm1_i[13],pwm1_i[13-1:6],1'b0,bit3_b,bit2_b,bit3_b,bit1_b,bit3_b,bit2_b,bit3_b,bit0_b,bit3_b,bit2_b,bit3_b,bit1_b,bit3_b,bit2_b,bit3_b};
 end
-*/
+
 
 
 //---------------------------------------------------------------------------------
