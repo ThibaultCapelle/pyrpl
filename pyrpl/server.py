@@ -11,7 +11,7 @@ from ServerPy.server_base import Generic_Server
 from ServerPy.client_base import Generic_Client
 import socket
 h_name = socket.gethostname()
-IP_addres = socket.gethostbyname(h_name)
+IP_addres = socket.gethostbyname(h_name+'.local')
 
 
 class Server(Generic_Server):
