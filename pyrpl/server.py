@@ -9,11 +9,14 @@ import struct, mmap
 import sys
 from ServerPy.server_base import Generic_Server
 from ServerPy.client_base import Generic_Client
+import socket
+h_name = socket.gethostname()
+IP_addres = socket.gethostbyname(h_name)
 
 
 class Server(Generic_Server):
     
-    def __init__(self, ip='172.24.3.105', port=9000):
+    def __init__(self, ip=IP_addres, port=9000):
         super().__init__(ip=ip, port=port, serial_driver=Driver())
 
 class Client(Generic_Client):
