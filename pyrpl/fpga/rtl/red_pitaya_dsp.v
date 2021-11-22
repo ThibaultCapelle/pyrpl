@@ -152,7 +152,7 @@ reg [MODULES-1:0] sync;
 wire [ 32-1: 0] module_rdata [MODULES-1:0];  
 wire            module_ack   [MODULES-1:0];
 
-wire multiply_enable;
+reg multiply_enable;
 
 //connect scope
 assign scope1_o = input_signal[SCOPE1];

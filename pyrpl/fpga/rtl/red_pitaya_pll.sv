@@ -13,6 +13,8 @@
 module red_pitaya_pll (
   // inputs
   input  logic clk       ,  // clock
+  input  logic clk2      ,
+  input  logic clk_select,
   input  logic rstn      ,  // reset - active low
   // output clocks
   output logic clk_adc   ,  // ADC clock
@@ -65,9 +67,8 @@ PLLE2_ADV #(
    // Input clock control
    .CLKFBIN      (clk_fb    ),
    .CLKIN1       (clk       ),
-   .CLKIN2       (1'b0      ),
-   // Tied to always select the primary input clock
-   .CLKINSEL     (1'b1 ),
+   .CLKIN2       (clk2      ),
+   .CLKINSEL     (clk_select ),
    // Ports for dynamic reconfiguration
    .DADDR        (7'h0 ),
    .DCLK         (1'b0 ),
