@@ -54,6 +54,56 @@ class Client(Generic_Client):
     def TTL_frequency(self, val):
         FPGA_val=int(125e6/9/val)
         self.write_reg(0x40200000, 0x248, val=FPGA_val)
+    
+    @property
+    def VIn0(self):
+        return self.write_reg(0x40400000, 0x0)/1904*3.3
+    
+    @property
+    def VIn1(self):
+        res=self.write_reg(0x40400000, 0x4)/1904*3.3
+        return res
+    
+    @property
+    def VIn2(self):
+        res=self.write_reg(0x40400000, 0x8)/1904*3.3
+        return res
+    
+    @property
+    def VIn3(self):
+        res=self.write_reg(0x40400000, 0xc)/1904*3.3
+        return res
+    
+    @property
+    def clk_source(self):
+        ext=self.write_reg(0x40200000, 0x254)
+        if ext==0:
+            return 'internal'
+        else:
+            selection=self.write_reg(0x40200000, 0x250)
+            if selection==0:
+                return 'external 125MHz'
+            elif selection==1:
+                return 'external 10MHz'
+    
+    @clk_source.setter
+    def clk_source(self, val):
+        if val=='internal':
+            self.write_reg(0x40200000, 0x254, val=0)
+        elif val=='external 125MHz':
+            self.write_reg(0x40200000, 0x250, val=0)
+            self.write_reg(0x40200000, 0x254, val=1)
+        elif val=='external 125MHz':
+            self.write_reg(0x40200000, 0x250, val=1)
+            self.write_reg(0x40200000, 0x254, val=1)
+    
+    @property
+    def use_digital_mult(self):
+        return self.write_reg(0x40300000, 0x14)==1
+    
+    @use_digital_mult.setter
+    def use_digital_mult(self, val):
+        self.write_reg(0x40300000, 0x14, val=int(val))
 
 class Driver:
     
