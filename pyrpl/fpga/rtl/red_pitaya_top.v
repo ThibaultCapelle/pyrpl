@@ -340,10 +340,6 @@ red_pitaya_pll pll (
   .pll_locked  (pll_locked)
 );
 
-
-
-
-
 BUFG bufg_adc_clk    (.O (adc_clk   ), .I (pll_adc_clk   ));
 BUFG bufg_dac_clk_1x (.O (dac_clk_1x), .I (pll_dac_clk_1x));
 BUFG bufg_dac_clk_2x (.O (dac_clk_2x), .I (pll_dac_clk_2x));
@@ -412,6 +408,9 @@ wire  [  8-1: 0] exp_p_in , exp_n_in ;
 wire  [  8-1: 0] exp_p_out, exp_n_out;
 wire  [  8-1: 0] exp_p_dir, exp_n_dir;
 
+BUFG i_clk_ext_2 (.O (test_clk), .I (pll_adc_clk_2));
+assign exp_n_out=test_clk;
+
 red_pitaya_hk i_hk (
   // system signals
   .clk_i           (  adc_clk                    ),  // clock
@@ -420,7 +419,7 @@ red_pitaya_hk i_hk (
   .led_o           (  led_o                      ),  // LED output
   // global configuration
   .digital_loop    (  digital_loop               ),
-  // Expansion connector
+  // Expansion connector*/
   /*.exp_p_dat_i     (  exp_p_in                   ),  // input data
   .exp_p_dat_o     (  exp_p_out                  ),  // output data
   .exp_p_dir_o     (  exp_p_dir                  ),  // 1-output enable

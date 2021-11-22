@@ -75,9 +75,11 @@ read_verilog                      $path_rtl/red_pitaya_pll_ext.sv
 read_verilog                      $path_rtl/red_pitaya_ps.v
 read_verilog                      $path_rtl/red_pitaya_pwm.sv
 read_verilog                      $path_rtl/red_pitaya_scope.v
+read_verilog                      $path_rtl/red_pitaya_pll_ext.sv
 read_verilog                      $path_rtl/red_pitaya_top.v
 
 #custom modules
+
 read_verilog                      $path_rtl/red_pitaya_adv_trigger.v
 read_verilog                      $path_rtl/red_pitaya_saturate.v
 read_verilog                      $path_rtl/red_pitaya_product_sat.v

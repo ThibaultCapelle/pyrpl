@@ -255,8 +255,9 @@ edge_detect_holdoff e1(
     .detector_out(edge_input_bis)
 );
 
-assign exp_n_dat_o[2] = output_clk;
-assign exp_n_dat_o[0] = output_clk;
+
+
+assign exp_n_dat_o[2] = new_clk;
 assign exp_p_dat_o = edge_input_bis;
 
 
