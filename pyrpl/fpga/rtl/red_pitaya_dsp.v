@@ -152,6 +152,8 @@ reg [MODULES-1:0] sync;
 wire [ 32-1: 0] module_rdata [MODULES-1:0];  
 wire            module_ack   [MODULES-1:0];
 
+wire multiply_enable;
+
 //connect scope
 assign scope1_o = input_signal[SCOPE1];
 assign scope2_o = input_signal[SCOPE2];
@@ -164,6 +166,7 @@ multiplicator #(
     mult
     (
     .clk_i(clk_i),
+    .enable(multiply_enable),
     .signal1_i(asg1_i),
     .signal2_i(asg2_i),
     .signal_o(output_direct[ASG1])
@@ -288,12 +291,15 @@ always @(posedge clk_i) begin
       input_select [PWM1] <= NONE;
       
       sync <= {MODULES{1'b1}} ;  // all modules on by default
+      
+      multiply_enable <= 1'b0;
    end
    else begin
       if (sys_wen) begin
          if (sys_addr[16-1:0]==16'h00)     input_select[sys_addr[16+LOG_MODULES-1:16]] <= sys_wdata[ LOG_MODULES-1:0];
          if (sys_addr[16-1:0]==16'h04)    output_select[sys_addr[16+LOG_MODULES-1:16]] <= sys_wdata[ 2-1:0];
          if (sys_addr[16-1:0]==16'h0C)                                            sync <= sys_wdata[MODULES-1:0];
+         if (sys_addr[16-1:0]==16'h14)                                 multiply_enable <= sys_wdata[0];
       end
    end
 end
@@ -312,7 +318,8 @@ end else begin
 	  20'h08 : begin sys_ack <= sys_en;          sys_rdata <= {{32- 2{1'b0}},dat_b_saturated,dac_a_saturated}; end
 	  20'h0C : begin sys_ack <= sys_en;          sys_rdata <= {{32-MODULES{1'b0}},sync} ; end
       20'h10 : begin sys_ack <= sys_en;          sys_rdata <= {{32- 14{1'b0}},output_signal[sys_addr[16+LOG_MODULES-1:16]]} ; end
-
+      20'h14 : begin sys_ack <= sys_en;          sys_rdata <= {{32- 1{1'b0}},multiply_enable} ; end
+      
      default : begin sys_ack <= module_ack[sys_addr[16+LOG_MODULES-1:16]];    sys_rdata <=  module_rdata[sys_addr[16+LOG_MODULES-1:16]]  ; end
    endcase
 end
