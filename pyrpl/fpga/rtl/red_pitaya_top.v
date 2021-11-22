@@ -312,7 +312,8 @@ IBUFDS i_clk (.I (adc_clk_p_i), .IB (adc_clk_n_i), .O (adc_clk_in));  // differe
 
 wire pll_ext;
 wire ext_clk;
-wire clk_select;
+wire clk_ext_select;
+wire clk_ext_activate;
 red_pitaya_pll_ext pll_ext (
   // inputs
   .clk         (daisy_p_i[1]),  // clock
@@ -320,13 +321,13 @@ red_pitaya_pll_ext pll_ext (
   // output clocks
   .clk_adc     (pll_ext   )  // ADC clock
 );
-BUFG bufg_ext_clk    (.O (ext_clk   ), .I (pll_ext   ));
+BUFGMUX bufg_ext_clk    (.O (ext_clk   ), .I0 (daisy_p_i[1]), .I1(pll_ext   ), .S(clk_ext_select));
 
 red_pitaya_pll pll (
   // inputs
   .clk         (ext_clk),  // clock
   .clk2        (adc_clk_in),
-  .clk_select  (clk_select),
+  .clk_select  (clk_ext_activate),
   .rstn        (frstn[0]  ),  // reset - active low
   // output clocks
   .clk_adc     (pll_adc_clk   ),  // ADC clock
@@ -515,7 +516,8 @@ red_pitaya_asg i_asg (
   .exp_p_dat_o     (  exp_p_out                  ),  // output data
   .exp_p_dir_o     (  exp_p_dir                  ),  // 1-output enable
   .ext_clk(ext_clk),
-  .clk_select(clk_select),
+  .clk_ext_select(clk_select),
+  .clk_ext_activate(clk_ext_activate),
   // System bus
   .sys_addr        (  sys_addr                   ),  // address
   .sys_wdata       (  sys_wdata                  ),  // write data

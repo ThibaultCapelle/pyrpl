@@ -90,7 +90,8 @@ module red_pitaya_asg #(
   output [DWE-1:0] exp_p_dat_o,  // exp. con. output data
   output [DWE-1:0] exp_p_dir_o,  // exp. con. 1-output enable
   input ext_clk,
-  output clk_select,
+  output clk_ext_select,
+  output clk_ext_activate,
   // System bus
   input      [ 32-1: 0] sys_addr  ,  // bus address
   input      [ 32-1: 0] sys_wdata ,  // bus write data
@@ -167,7 +168,8 @@ red_pitaya_adv_trigger adv_trig_b (
 reg [32-1:0] trigger_delay;
 reg [32-1:0] frequency_divide;
 reg [32-1:0] frequency_divide_ext_clk;
-reg clk_select_reg;
+reg clk_ext_select_reg;
+reg clk_ext_activate_reg;
 
 
 red_pitaya_asg_ch  #(.RSZ (RSZ)) ch [1:0] (
@@ -341,7 +343,8 @@ if (dac_rstn_i == 1'b0) begin
    trigger_delay <= 32'hf;
    frequency_divide <= 32'd100;
    frequency_divide_ext_clk <= 32'd100;
-   clk_select_reg <= 1'b1;
+   clk_ext_activate_reg <= 1'b0;
+   clk_ext_select_reg <= 1'b0;
 end else begin
    trig_a_sw  <= sys_wen && (sys_addr[19:0]==20'h0) && sys_wdata[0]  ;
    if (sys_wen && (sys_addr[19:0]==20'h0))
@@ -380,7 +383,8 @@ end else begin
       if (sys_addr[19:0]==20'h240)  trigger_delay <= sys_wdata[32-1: 0] ;
       if (sys_addr[19:0]==20'h248)  frequency_divide <= sys_wdata[32-1: 0] ;
       if (sys_addr[19:0]==20'h24C)  frequency_divide_ext_clk <= sys_wdata[32-1: 0] ;
-      if (sys_addr[19:0]==20'h250)  clk_select_reg <= sys_wdata[0] ;
+      if (sys_addr[19:0]==20'h250)  clk_ext_select_reg <= sys_wdata[0] ;
+      if (sys_addr[19:0]==20'h254)  clk_ext_activate_reg <= sys_wdata[0] ;
 
    end
 
@@ -437,7 +441,8 @@ end else begin
      20'h00240 : begin sys_ack <= sys_en;          sys_rdata <= trigger_delay     ; end
      20'h00248 : begin sys_ack <= sys_en;          sys_rdata <= frequency_divide     ; end
      20'h0024C : begin sys_ack <= sys_en;          sys_rdata <= frequency_divide_ext_clk     ; end
-     20'h00250 : begin sys_ack <= sys_en;          sys_rdata <= clk_select_reg     ; end
+     20'h00250 : begin sys_ack <= sys_en;          sys_rdata <= clk_ext_select_reg     ; end
+     20'h00254 : begin sys_ack <= sys_en;          sys_rdata <= clk_ext_activate_reg     ; end
 
 	 20'h1zzzz : begin sys_ack <= ack_dly;         sys_rdata <= {{32-14{1'b0}},buf_a_rdata}        ; end
      20'h2zzzz : begin sys_ack <= ack_dly;         sys_rdata <= {{32-14{1'b0}},buf_b_rdata}        ; end
@@ -448,7 +453,8 @@ end
 
 // forward the current phase of asg1;
 assign asg1phase_o = buf_a_rpnt;
-assign clk_select = clk_select_reg;
+assign clk_ext_select = clk_ext_select_reg;
+assign clk_ext_activate = clk_ext_activate_reg;
 
 
 //red_pitaya_prng_lehmer
