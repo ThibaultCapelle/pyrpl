@@ -15,12 +15,6 @@ module red_pitaya_pll_ext (
   input  logic clk       ,  // clock
   input  logic rstn      ,  // reset - active low
   // output clocks
-<<<<<<< HEAD
-  output logic clk_adc  // ADC clock
-);
-
-logic clk_fb;
-=======
   output logic clk_adc   ,  // ADC clock
   output logic clk_dac_1x,  // DAC clock
   output logic clk_dac_2x,  // DAC clock
@@ -36,7 +30,6 @@ wire double_clk_out;
 wire double_clk_in;
 BUFG bufg_souble_clk    (.O (double_clk_out   ), .I (double_clk_in   ));
 
->>>>>>> 056b055eef32a5a103acd24647a7177bcbf6dbec
 
 MMCME2_ADV #(
    .BANDWIDTH            ("OPTIMIZED"),
