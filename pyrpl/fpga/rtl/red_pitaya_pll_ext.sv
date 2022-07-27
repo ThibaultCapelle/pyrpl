@@ -42,21 +42,6 @@ MMCME2_ADV #(
    .BANDWIDTH            ("OPTIMIZED"),
    .COMPENSATION         ("ZHOLD"    ),
    .DIVCLK_DIVIDE        ( 1         ),
-<<<<<<< HEAD
-   .CLKFBOUT_MULT_F      ( 62.5      ),
-   .CLKFBOUT_PHASE       ( 0.000     ),
-   .CLKOUT0_DIVIDE_F     ( 5         ),
-   .CLKOUT0_PHASE        ( 0.000     ),
-   .CLKOUT0_DUTY_CYCLE   ( 0.5       ),
-   .CLKIN1_PERIOD        ( 100.000   ),
-   .REF_JITTER1          ( 0.010     )
-) pll_ext (
-   // Output clocks
-   .CLKFBOUT     (clk_fb    ),
-   .CLKFBIN      (clk_fb    ),
-   .CLKOUT0      (clk_adc   ),
-   .CLKIN1       (clk       ),
-=======
    .CLKFBOUT_MULT_F      ( 60      ),
    .CLKOUT0_PHASE        ( 0.000     ),
    .CLKFBOUT_PHASE       ( 0.000     ),
@@ -153,7 +138,6 @@ MMCME2_ADV #(
    // Input clock control
    .CLKFBIN      (clk_fb    ),
    .CLKIN1       (double_clk_out),
->>>>>>> 056b055eef32a5a103acd24647a7177bcbf6dbec
    .CLKIN2       (1'b0      ),
    // Tied to always select the primary input clock
    .CLKINSEL     (1'b1 ),
@@ -165,12 +149,6 @@ MMCME2_ADV #(
    .DO           (     ),
    .DRDY         (     ),
    .DWE          (1'b0 ),
-<<<<<<< HEAD
-=======
-   .PSCLK        (     ),
-   .PSEN         (     ),
-   .PSINCDEC     (     ),
->>>>>>> 056b055eef32a5a103acd24647a7177bcbf6dbec
    // Other control and status signals
    .LOCKED       (pll_locked),
    .PWRDWN       (1'b0      ),

@@ -325,9 +325,9 @@ BUFGMUX bufg_ext_clk    (.O (ext_clk   ), .I0 (daisy_p_i[1]), .I1(pll_ext   ), .
 
 red_pitaya_pll pll (
   // inputs
-  .clk         (ext_clk),  // clock
+  .clk         (daisy_p_i[1]),  // clock
   .clk2        (adc_clk_in),
-  .clk_select  (1'b1),
+  .clk_select  (1'b0),
   .rstn        (frstn[0]  ),  // reset - active low
   // output clocks
   .clk_adc     (pll_adc_clk   ),  // ADC clock
