@@ -327,7 +327,7 @@ red_pitaya_pll pll (
   // inputs
   .clk         (ext_clk),  // clock
   .clk2        (adc_clk_in),
-  .clk_select  (clk_ext_activate),
+  .clk_select  (1'b1),
   .rstn        (frstn[0]  ),  // reset - active low
   // output clocks
   .clk_adc     (pll_adc_clk   ),  // ADC clock
