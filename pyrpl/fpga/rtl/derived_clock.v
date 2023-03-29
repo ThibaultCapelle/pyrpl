@@ -1,5 +1,5 @@
 module derived_clock #(
-	parameter DIVIDE = 9
+	parameter DIVIDE = 1
 )
 (
     input [31:0] N,

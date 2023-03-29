@@ -408,9 +408,6 @@ wire  [  8-1: 0] exp_p_in , exp_n_in ;
 wire  [  8-1: 0] exp_p_out, exp_n_out;
 wire  [  8-1: 0] exp_p_dir, exp_n_dir;
 
-BUFG i_clk_ext_2 (.O (test_clk), .I (pll_adc_clk_2));
-assign exp_n_out=test_clk;
-
 red_pitaya_hk i_hk (
   // system signals
   .clk_i           (  adc_clk                    ),  // clock

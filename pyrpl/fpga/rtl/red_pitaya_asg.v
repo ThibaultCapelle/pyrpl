@@ -167,6 +167,7 @@ red_pitaya_adv_trigger adv_trig_b (
 
 reg [32-1:0] trigger_delay;
 reg [32-1:0] frequency_divide;
+reg [32-1:0] frequency_divide_2;
 reg [32-1:0] frequency_divide_ext_clk;
 reg clk_ext_select_reg;
 reg clk_ext_activate_reg;
@@ -217,9 +218,10 @@ wire counting;
 wire out;
 wire [31:0] count_reg;
 wire new_clk;
+wire new_clk_2;
 wire output_clk;
 
-assign exp_n_dir_o = 8'b101;
+assign exp_n_dir_o = 8'b1101;
 assign exp_p_dir_o = 8'b1;
 
 derived_clock TTL(
@@ -227,6 +229,12 @@ derived_clock TTL(
     .clk(dac_clk_i_2x),
     .rst_n(dac_rstn_i),
     .output_clk(new_clk)
+);
+derived_clock TTL_2(
+    .N(frequency_divide_2),
+    .clk(dac_clk_i_2x),
+    .rst_n(dac_rstn_i),
+    .output_clk(new_clk_2)
 );
 
 derived_clock #(.DIVIDE(1)) derivation (
@@ -258,6 +266,7 @@ edge_detect_holdoff e1(
 
 
 assign exp_n_dat_o[2] = new_clk;
+assign exp_n_dat_o[3] = new_clk_2;
 assign exp_p_dat_o = edge_input_bis;
 
 
@@ -343,6 +352,7 @@ if (dac_rstn_i == 1'b0) begin
    
    trigger_delay <= 32'hf;
    frequency_divide <= 32'd100;
+   frequency_divide_2 <= 32'd100;
    frequency_divide_ext_clk <= 32'd100;
    clk_ext_activate_reg <= 1'b0;
    clk_ext_select_reg <= 1'b0;
@@ -386,6 +396,7 @@ end else begin
       if (sys_addr[19:0]==20'h24C)  frequency_divide_ext_clk <= sys_wdata[32-1: 0] ;
       if (sys_addr[19:0]==20'h250)  clk_ext_select_reg <= sys_wdata[0] ;
       if (sys_addr[19:0]==20'h254)  clk_ext_activate_reg <= sys_wdata[0] ;
+      if (sys_addr[19:0]==20'h258)  frequency_divide_2 <= sys_wdata[32-1: 0] ;
 
    end
 
@@ -444,6 +455,7 @@ end else begin
      20'h0024C : begin sys_ack <= sys_en;          sys_rdata <= frequency_divide_ext_clk     ; end
      20'h00250 : begin sys_ack <= sys_en;          sys_rdata <= clk_ext_select_reg     ; end
      20'h00254 : begin sys_ack <= sys_en;          sys_rdata <= clk_ext_activate_reg     ; end
+     20'h00258 : begin sys_ack <= sys_en;          sys_rdata <= frequency_divide_2     ; end
 
 	 20'h1zzzz : begin sys_ack <= ack_dly;         sys_rdata <= {{32-14{1'b0}},buf_a_rdata}        ; end
      20'h2zzzz : begin sys_ack <= ack_dly;         sys_rdata <= {{32-14{1'b0}},buf_b_rdata}        ; end
