@@ -65,6 +65,8 @@ read_verilog                      $path_rtl/axi_wr_fifo.v
 read_verilog                      $path_rtl/red_pitaya_ams.v
 read_verilog                      $path_rtl/red_pitaya_asg_ch.v
 read_verilog                      $path_rtl/derived_clock.v
+read_verilog                      $path_rtl/derived_clock_nosync.v
+read_verilog                      $path_rtl/derived_clock_fractional.v
 read_verilog                      $path_rtl/red_pitaya_asg.v
 read_verilog                      $path_rtl/red_pitaya_dfilt1.v
 read_verilog                      $path_rtl/red_pitaya_hk.v
@@ -96,6 +98,7 @@ read_verilog                      $path_rtl/red_pitaya_iq_block.v
 read_verilog                      $path_rtl/red_pitaya_trigger_block.v
 read_verilog                      $path_rtl/red_pitaya_prng.v
 read_verilog                      $path_rtl/edge_detect.v
+read_verilog                      $path_rtl/edge_detect_both.v
 read_verilog                      $path_rtl/counter.v
 read_verilog                      $path_rtl/counter_simple.v
 read_verilog                      $path_rtl/multiplicator.v
